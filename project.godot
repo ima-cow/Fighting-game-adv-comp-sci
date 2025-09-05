@@ -1,0 +1,8 @@
+[application]
+
+config/name="Fighting Game Adv Comp Sci"
+config/icon="res://icon.svg"
+
+[rendering]
+
+renderer/rendering_method="forward_plus"
