@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://djh5dkaqq22v"]
+
+[ext_resource type="PackedScene" uid="uid://dmslc11hhyyu" path="res://scenes/ninja.tscn" id="1_k366a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ugxj"]
+size = Vector2(1024, 160)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_k366a"]
+
+[node name="Ninja Gardens" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(0, 256)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(0, 32)
+shape = SubResource("RectangleShape2D_2ugxj")
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor"]
+position = Vector2(9.53674e-06, -7.62939e-06)
+scale = Vector2(1024, 96)
+texture = SubResource("PlaceholderTexture2D_k366a")
+
+[node name="Ninja" parent="." instance=ExtResource("1_k366a")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(256, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
