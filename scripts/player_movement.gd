@@ -27,3 +27,7 @@ func _process(delta: float) -> void:
 		queue_free()
 
 	move_and_slide()
+
+
+func _on_kill_zone_area_entered(area: Area2D) -> void:
+	pass # Replace with function body.
