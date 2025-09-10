@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
-
-const SPEED = 400
 const JUMP_VELOCITY = -800.0
+@export var speed = 400.0
+@export var health = 100.0
 
 
 func _physics_process(delta: float) -> void:
@@ -16,10 +16,14 @@ func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("move_left", "move_right ")
+	var direction := Input.get_axis("move_left", "move_right")
 	if direction:
-		velocity.x = direction * SPEED
+		velocity.x = direction * speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, speed)
+
+func _process(delta: float) -> void:
+	if health >= 0:
+		queue_free()
 
 	move_and_slide()

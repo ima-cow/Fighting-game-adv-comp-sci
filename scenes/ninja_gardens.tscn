@@ -1,4 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://djh5dkaqq22v"]
+[gd_scene load_steps=7 format=3 uid="uid://djh5dkaqq22v"]
+
+[ext_resource type="PackedScene" uid="uid://dmslc11hhyyu" path="res://scenes/ninja.tscn" id="1_k366a"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_k366a"]
 
@@ -9,6 +11,8 @@ size = Vector2(1024, 160)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_psigm"]
 size = Vector2(288, 26)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_k366a"]
 
 [node name="Ninja Gardens" type="Node2D"]
 
@@ -51,3 +55,22 @@ shape = SubResource("RectangleShape2D_psigm")
 one_way_collision = true
 
 [node name="Kill Zone" type="Area2D" parent="."]
+position = Vector2(0, 448)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Kill Zone"]
+shape = SubResource("WorldBoundaryShape2D_k366a")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Kill Zone"]
+position = Vector2(-240, -16)
+shape = SubResource("WorldBoundaryShape2D_k366a")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Kill Zone"]
+position = Vector2(-244, 544)
+shape = SubResource("WorldBoundaryShape2D_k366a")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Kill Zone"]
+position = Vector2(-244, 544)
+shape = SubResource("WorldBoundaryShape2D_k366a")
+
+[node name="Ninja" parent="." instance=ExtResource("1_k366a")]
+speed = 1000.0
