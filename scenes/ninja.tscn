@@ -20,3 +20,5 @@ shape = SubResource("CapsuleShape2D_k366a")
 position = Vector2(4.76837e-07, 0)
 scale = Vector2(48, 64)
 texture = SubResource("PlaceholderTexture2D_78yxw")
+
+[node name="Moves" type="Node2D" parent="."]

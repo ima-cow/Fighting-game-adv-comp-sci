@@ -54,13 +54,13 @@ texture = SubResource("PlaceholderTexture2D_78yxw")
 shape = SubResource("RectangleShape2D_psigm")
 one_way_collision = true
 
-[node name="Kill Zone" type="Area2D" parent="."]
-position = Vector2(0, 448)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Kill Zone"]
-shape = SubResource("WorldBoundaryShape2D_k366a")
-
 [node name="Ninja" parent="." instance=ExtResource("1_k366a")]
 speed = 1000.0
 
-[connection signal="area_entered" from="Kill Zone" to="Ninja" method="_on_kill_zone_area_entered"]
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 432)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("WorldBoundaryShape2D_k366a")
+
+[connection signal="body_entered" from="Area2D" to="Ninja" method="_on_area_2d_body_entered"]
