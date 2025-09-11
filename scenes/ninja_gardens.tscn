@@ -60,17 +60,7 @@ position = Vector2(0, 448)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Kill Zone"]
 shape = SubResource("WorldBoundaryShape2D_k366a")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Kill Zone"]
-position = Vector2(-240, -16)
-shape = SubResource("WorldBoundaryShape2D_k366a")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Kill Zone"]
-position = Vector2(-244, 544)
-shape = SubResource("WorldBoundaryShape2D_k366a")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Kill Zone"]
-position = Vector2(-244, 544)
-shape = SubResource("WorldBoundaryShape2D_k366a")
-
 [node name="Ninja" parent="." instance=ExtResource("1_k366a")]
 speed = 1000.0
+
+[connection signal="area_entered" from="Kill Zone" to="Ninja" method="_on_kill_zone_area_entered"]
