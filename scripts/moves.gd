@@ -1,47 +1,72 @@
-class_name Moves extends RefCounted
+class_name Moves extends Node
 
-static var JAB = preload("res://scenes/moves/blank_move.tscn")
-static var DASH = preload("res://scenes/moves/blank_move.tscn")
-static var TILT = preload("res://scenes/moves/blank_move.tscn")
-static var SMASH = preload("res://scenes/moves/blank_move.tscn")
-static var GRAB = preload("res://scenes/moves/blank_move.tscn")
-static var SPECIAL = preload("res://scenes/moves/blank_move.tscn")
+@onready var game = $"."
+var jab_attack
+var dash_attack
+var tilt_attack
+var smash_attack
+var grab_attack
+var special_attack_1
+var special_attack_2
 
+var player_position
+var player_direction
 
-static func jab(player_position: Vector2, player_direction: int):
-	var attack = JAB.instantiate()
+func _init() -> void:
+	jab_attack = preload("res://scenes/moves/blank_move.tscn")
+	dash_attack = preload("res://scenes/moves/blank_move.tscn")
+	tilt_attack = preload("res://scenes/moves/blank_move.tscn")
+	smash_attack = preload("res://scenes/moves/blank_move.tscn")
+	grab_attack = preload("res://scenes/moves/blank_move.tscn")
+	special_attack_1 = preload("res://scenes/moves/blank_move.tscn")
+	special_attack_2 = preload("res://scenes/moves/blank_move.tscn")
+
+func jab():
+	print(player_position)
+	var attack = jab_attack.instantiate()
+	game.add_child(attack)
+	attack.global_position = player_position
+	print(attack.global_position)
+
+func dash():
+	var attack = dash_attack.instantiate()
 	attack.global_position = player_position
 
-static func dash(player_position: Vector2, player_direction: int):
-	var attack = DASH.instantiate()
+func tilt():
+	var attack = tilt_attack.instantiate()
 	attack.global_position = player_position
 
-static func tilt(player_position: Vector2, player_direction: int):
-	var attack = TILT.instantiate()
+func smash():
+	var attack = smash_attack.instantiate()
 	attack.global_position = player_position
 
-static func smash(player_position: Vector2, player_direction: int):
-	var attack = SMASH.instantiate()
+func grab():
+	var attack = grab_attack.instantiate()
 	attack.global_position = player_position
 
-static func grab(player_position: Vector2, player_direction: int):
-	var attack = GRAB.instantiate()
+func special_1():
+	var attack = special_attack_1.instantiate()
 	attack.global_position = player_position
 
-static func special(player_position: Vector2, player_direction: int):
-	var attack = SPECIAL.instantiate()
+func special_2():
+	var attack = special_attack_2.instantiate()
 	attack.global_position = player_position
 
-static func do_move(player_position: Vector2, player_direction: int):
-	if Input.is_action_pressed("jab") && !Input.is_action_pressed("move_left") && !Input.is_action_pressed("move_right"):
-		jab(player_position, player_direction)
-	elif Input.is_action_pressed("jab") && (Input.is_action_pressed("move_left") || Input.is_action_pressed("move_right")):
-		dash(player_position, player_direction)
-	elif Input.is_action_pressed("tilt"):
-		tilt(player_position, player_direction)
-	elif Input.is_action_pressed("smash"):
-		smash(player_position, player_direction)
-	elif Input.is_action_pressed("grab"):
-		grab(player_position, player_direction)
-	elif Input.is_action_pressed("special"):
-		special(player_position, player_direction)
+func do_move(position: Vector2, direction: int):
+	player_position = position
+	player_direction = direction
+	if Input.is_action_just_pressed("jab") && !Input.is_action_pressed("move_left") && !Input.is_action_pressed("move_right"):
+		jab()
+		print("jab")
+	elif Input.is_action_just_pressed("jab") && (Input.is_action_pressed("move_left") || Input.is_action_pressed("move_right")):
+		dash()
+	elif Input.is_action_just_pressed("tilt"):
+		tilt()
+	elif Input.is_action_just_pressed("smash"):
+		smash()
+	elif Input.is_action_just_pressed("grab"):
+		grab()
+	elif Input.is_action_just_pressed("special_1"):
+		special_1()
+	elif Input.is_action_just_pressed("special_2"):
+		special_2()

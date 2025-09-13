@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmslc11hhyyu"]
+[gd_scene load_steps=5 format=3 uid="uid://dmslc11hhyyu"]
 
 [ext_resource type="Script" uid="uid://dmmkpendim0ea" path="res://scripts/player_movement.gd" id="1_got4c"]
+[ext_resource type="Script" uid="uid://nhb5xlpp8vgu" path="res://scripts/ninja_moves.gd" id="2_4i837"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k366a"]
 radius = 16.0
@@ -21,4 +22,5 @@ position = Vector2(4.76837e-07, 0)
 scale = Vector2(48, 64)
 texture = SubResource("PlaceholderTexture2D_78yxw")
 
-[node name="Moves" type="Node2D" parent="."]
+[node name="MoveResolver" type="Node" parent="."]
+script = ExtResource("2_4i837")
