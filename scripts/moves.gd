@@ -1,6 +1,5 @@
 class_name Moves extends Node
 
-@onready var game = $"."
 var jab_attack
 var dash_attack
 var tilt_attack
