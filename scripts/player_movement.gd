@@ -3,7 +3,6 @@ extends CharacterBody2D
 const JUMP_VELOCITY = -800.0
 @export var speed = 400.0
 @export var health = 100.0
-@onready var ninja_moves = Moves.new()
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -19,7 +18,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, speed)
 	
 	move_and_slide()
-	ninja_moves.do_move(global_position, 0)
+	get_child(2).do_move(global_position, 0)
 
 func _process(delta: float) -> void:
 	if health <= 0:
