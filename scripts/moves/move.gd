@@ -1,16 +1,15 @@
 extends Area2D
 
-const START_UP = 0.1
-const UP_TIME = 10000
-const END_LAG = 0.1
+@export var start_up = 0.1
+@export var up_time = 0.1
+@export var end_lag = 0.1
 
 func _ready() -> void:
-	wait(START_UP)
+	await get_tree().create_timer(start_up).timeout
 	monitoring = true
 	get_child(1).visible = true
-	wait(UP_TIME+END_LAG)
-	print("done")
+	await get_tree().create_timer(up_time).timeout
+	monitoring = false
+	get_child(1).visible = false
+	await get_tree().create_timer(end_lag).timeout
 	queue_free()
-
-func wait(seconds: float) -> void:
-	await get_tree().create_timer(seconds).timeout

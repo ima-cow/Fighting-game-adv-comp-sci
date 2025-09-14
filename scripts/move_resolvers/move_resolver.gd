@@ -1,24 +1,15 @@
 class_name MoveResolver extends Node
 
-var jab_attack
-var dash_attack
-var tilt_attack
-var smash_attack
-var grab_attack
-var special_attack_1
-var special_attack_2
+@export var jab_attack = preload("res://scenes/moves/blank_move.tscn")
+@export var dash_attack = preload("res://scenes/moves/blank_move.tscn")
+@export var tilt_attack = preload("res://scenes/moves/blank_move.tscn")
+@export var smash_attack = preload("res://scenes/moves/blank_move.tscn")
+@export var grab_attack = preload("res://scenes/moves/blank_move.tscn")
+@export var special_attack_1 = preload("res://scenes/moves/blank_move.tscn")
+@export var special_attack_2 = preload("res://scenes/moves/blank_move.tscn")
 
 var player_position
 var player_direction
-
-func _init() -> void:
-	jab_attack = preload("res://scenes/moves/blank_move.tscn")
-	dash_attack = preload("res://scenes/moves/blank_move.tscn")
-	tilt_attack = preload("res://scenes/moves/blank_move.tscn")
-	smash_attack = preload("res://scenes/moves/blank_move.tscn")
-	grab_attack = preload("res://scenes/moves/blank_move.tscn")
-	special_attack_1 = preload("res://scenes/moves/blank_move.tscn")
-	special_attack_2 = preload("res://scenes/moves/blank_move.tscn")
 
 func jab():
 	var attack = jab_attack.instantiate()
