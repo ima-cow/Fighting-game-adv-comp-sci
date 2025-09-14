@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dmslc11hhyyu"]
 
 [ext_resource type="Script" uid="uid://dmmkpendim0ea" path="res://scripts/player_movement.gd" id="1_got4c"]
-[ext_resource type="Script" uid="uid://nhb5xlpp8vgu" path="res://scripts/move_resolvers/ninja_move_resolver.gd" id="2_4i837"]
+[ext_resource type="Script" uid="uid://debrlwtgoufjc" path="res://scripts/move_resolver.gd" id="2_4i837"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k366a"]
 radius = 16.0
