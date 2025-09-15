@@ -38,7 +38,7 @@ position = Vector2(0, 32)
 shape = SubResource("RectangleShape2D_iaxrx")
 
 [node name="Platform" type="StaticBody2D" parent="Stage"]
-position = Vector2(0, 48)
+position = Vector2(0, 96)
 
 [node name="Sprite2D" type="Sprite2D" parent="Stage/Platform"]
 position = Vector2(0, -4.76837e-07)
@@ -50,7 +50,7 @@ shape = SubResource("RectangleShape2D_5md5d")
 one_way_collision = true
 
 [node name="Platform2" type="StaticBody2D" parent="Stage"]
-position = Vector2(352, 48)
+position = Vector2(352, 96)
 
 [node name="Sprite2D" type="Sprite2D" parent="Stage/Platform2"]
 position = Vector2(0, -4.76837e-07)
@@ -62,7 +62,7 @@ shape = SubResource("RectangleShape2D_5md5d")
 one_way_collision = true
 
 [node name="Platform3" type="StaticBody2D" parent="Stage"]
-position = Vector2(-352, 48)
+position = Vector2(-352, 96)
 
 [node name="Sprite2D" type="Sprite2D" parent="Stage/Platform3"]
 position = Vector2(0, -4.76837e-07)
