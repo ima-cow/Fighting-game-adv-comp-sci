@@ -29,8 +29,8 @@ shape = SubResource("RectangleShape2D_uenyh")
 position = Vector2(0, 256)
 
 [node name="Sprite2D" type="Sprite2D" parent="Stage/Floor"]
-position = Vector2(3.8147e-05, -7.62939e-06)
-scale = Vector2(1216, 96)
+position = Vector2(3.8147e-05, 32)
+scale = Vector2(1216, 160)
 texture = SubResource("PlaceholderTexture2D_uenyh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Floor"]

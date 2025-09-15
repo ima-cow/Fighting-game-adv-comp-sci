@@ -1,3 +1,74 @@
-[gd_scene format=3 uid="uid://bc87oi50iuyew"]
+[gd_scene load_steps=6 format=3 uid="uid://bc87oi50iuyew"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lqbhf"]
+size = Vector2(1536, 880)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ehygr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iaxrx"]
+size = Vector2(1216, 160)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ki0ho"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5md5d"]
+size = Vector2(256, 26)
 
 [node name="BigHandsCity" type="Node"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PlayArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea"]
+visible = false
+shape = SubResource("RectangleShape2D_lqbhf")
+
+[node name="Stage" type="Node" parent="."]
+
+[node name="Floor" type="StaticBody2D" parent="Stage"]
+position = Vector2(0, 256)
+
+[node name="Sprite2D" type="Sprite2D" parent="Stage/Floor"]
+position = Vector2(3.8147e-05, 32)
+scale = Vector2(1216, 160)
+texture = SubResource("PlaceholderTexture2D_ehygr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Floor"]
+position = Vector2(0, 32)
+shape = SubResource("RectangleShape2D_iaxrx")
+
+[node name="Platform" type="StaticBody2D" parent="Stage"]
+position = Vector2(0, 48)
+
+[node name="Sprite2D" type="Sprite2D" parent="Stage/Platform"]
+position = Vector2(0, -4.76837e-07)
+scale = Vector2(256, 32)
+texture = SubResource("PlaceholderTexture2D_ki0ho")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Platform"]
+shape = SubResource("RectangleShape2D_5md5d")
+one_way_collision = true
+
+[node name="Platform2" type="StaticBody2D" parent="Stage"]
+position = Vector2(352, 48)
+
+[node name="Sprite2D" type="Sprite2D" parent="Stage/Platform2"]
+position = Vector2(0, -4.76837e-07)
+scale = Vector2(256, 32)
+texture = SubResource("PlaceholderTexture2D_ki0ho")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Platform2"]
+shape = SubResource("RectangleShape2D_5md5d")
+one_way_collision = true
+
+[node name="Platform3" type="StaticBody2D" parent="Stage"]
+position = Vector2(-352, 48)
+
+[node name="Sprite2D" type="Sprite2D" parent="Stage/Platform3"]
+position = Vector2(0, -4.76837e-07)
+scale = Vector2(256, 32)
+texture = SubResource("PlaceholderTexture2D_ki0ho")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Platform3"]
+shape = SubResource("RectangleShape2D_5md5d")
+one_way_collision = true
