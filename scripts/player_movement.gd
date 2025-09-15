@@ -6,7 +6,7 @@ const JUMP_VELOCITY = -800.0
 var can_move = true
 
 func _ready() -> void:
-	$"../Play Area".body_shape_exited.connect(_on_play_area_body_shaped_exited)
+	$"../PlayArea".body_shape_exited.connect(_on_play_area_body_shaped_exited)
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():

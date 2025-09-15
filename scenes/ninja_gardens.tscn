@@ -21,9 +21,9 @@ size = Vector2(288, 26)
 
 [node name="Ninja" parent="." instance=ExtResource("1_k366a")]
 
-[node name="Play Area" type="Area2D" parent="."]
+[node name="PlayArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Play Area"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea"]
 visible = false
 shape = SubResource("RectangleShape2D_78yxw")
 
