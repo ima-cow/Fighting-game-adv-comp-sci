@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://djh5dkaqq22v"]
 
-[ext_resource type="PackedScene" uid="uid://dmslc11hhyyu" path="res://scenes/ninja.tscn" id="1_k366a"]
+[ext_resource type="PackedScene" uid="uid://dmslc11hhyyu" path="res://scenes/characters/ninja.tscn" id="1_m4npe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_78yxw"]
 size = Vector2(1536, 880)
@@ -15,11 +15,11 @@ size = Vector2(1024, 160)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_psigm"]
 size = Vector2(288, 26)
 
-[node name="Ninja Gardens" type="Node"]
+[node name="NinjaGardens" type="Node"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Ninja" parent="." instance=ExtResource("1_k366a")]
+[node name="Ninja" parent="." instance=ExtResource("1_m4npe")]
 
 [node name="PlayArea" type="Area2D" parent="."]
 
@@ -62,5 +62,17 @@ scale = Vector2(288, 32)
 texture = SubResource("PlaceholderTexture2D_78yxw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Platform2"]
+shape = SubResource("RectangleShape2D_psigm")
+one_way_collision = true
+
+[node name="Platform3" type="StaticBody2D" parent="Stage"]
+position = Vector2(0, -80)
+
+[node name="Sprite2D" type="Sprite2D" parent="Stage/Platform3"]
+position = Vector2(7.62939e-06, -4.76837e-07)
+scale = Vector2(288, 32)
+texture = SubResource("PlaceholderTexture2D_78yxw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Platform3"]
 shape = SubResource("RectangleShape2D_psigm")
 one_way_collision = true
