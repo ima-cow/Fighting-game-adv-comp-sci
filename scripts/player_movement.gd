@@ -4,8 +4,6 @@ const JUMP_VELOCITY = -800.0
 @export var speed = 400.0
 @export var health = 100.0
 var can_move = true
-#1 is right, 0 is left
-var direction = SIDE_LEFT
 
 func _ready() -> void:
 	$"../PlayArea".body_shape_exited.connect(_on_play_area_body_shaped_exited)
@@ -30,19 +28,15 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if health <= 0:
 		print("YOU DIED!")
 		queue_free()
 	
-	if velocity.x < 0 && !$Sprite2D.flip_h:
+	if velocity.x < 0:
 		$Sprite2D.flip_h = true
-	elif velocity.x > 0 && $Sprite2D.flip_h:
+	elif velocity.x > 0:
 		$Sprite2D.flip_h = false
 
 func _on_play_area_body_shaped_exited():
 	health = 0
-
-func flip_needed():
-	# test
-	pass
