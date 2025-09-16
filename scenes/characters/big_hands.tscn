@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtjm3krq2hla"]
+
+[ext_resource type="Script" uid="uid://dmmkpendim0ea" path="res://scripts/player_movement.gd" id="1_qudrh"]
+[ext_resource type="Script" uid="uid://debrlwtgoufjc" path="res://scripts/move_resolver.gd" id="2_8b2gc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k366a"]
+radius = 16.0
+height = 64.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_78yxw"]
+
+[node name="Ninja" type="CharacterBody2D"]
+script = ExtResource("1_qudrh")
+metadata/SPEED = 0
+metadata/JUMP_SPEED = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_k366a")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4.76837e-07, 0)
+scale = Vector2(48, 64)
+texture = SubResource("PlaceholderTexture2D_78yxw")
+
+[node name="MoveResolver" type="Node" parent="."]
+script = ExtResource("2_8b2gc")
