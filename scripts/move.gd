@@ -18,3 +18,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	global_position = get_parent().get_parent().global_position
+
+#func _process(delta: float) -> void:
+	#if 
