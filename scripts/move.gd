@@ -5,13 +5,16 @@ extends Area2D
 @export var end_lag = 0.1
 
 func _ready() -> void:
-	get_parent().get_parent().can_move = false
+	$"../..".can_move = false
 	await get_tree().create_timer(start_up).timeout
 	monitoring = true
-	get_child(1).visible = true
+	$Sprite2D.visible = true
 	await get_tree().create_timer(up_time).timeout
 	monitoring = false
-	get_child(1).visible = false
+	$Sprite2D.visible = false
 	await get_tree().create_timer(end_lag).timeout
-	get_parent().get_parent().can_move = true
+	$"../..".can_move = true
 	queue_free()
+
+func _physics_process(delta: float) -> void:
+	global_position = get_parent().get_parent().global_position

@@ -152,3 +152,5 @@ text = "Big Hands"
 horizontal_alignment = 1
 
 [connection signal="button_up" from="CharacterSelector/CenterContainer/HBoxContainer/CenterContainer/VBoxContainer/NinjaButton" to="." method="_on_ninja_button_button_up"]
+[connection signal="button_up" from="CharacterSelector/CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer/CowboyButton" to="." method="_on_cowboy_button_button_up"]
+[connection signal="button_up" from="CharacterSelector/CenterContainer/HBoxContainer/CenterContainer3/VBoxContainer/BigHandsButton" to="." method="_on_big_hands_button_button_up"]

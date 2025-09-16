@@ -19,6 +19,8 @@ func instantiate_move(selected_move: PackedScene):
 func do_move(position: Vector2, direction: int):
 	player_position = position
 	player_direction = direction
+	#spagetti code :/
+	#lmk if you know any better way to do this
 	if Input.is_action_just_pressed("jab") && !Input.is_action_pressed("move_left") && !Input.is_action_pressed("move_right"):
 		instantiate_move(jab)
 		print("jab")

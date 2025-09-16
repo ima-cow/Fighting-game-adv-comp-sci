@@ -22,9 +22,9 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, speed)
 		
-		get_child(2).do_move(global_position, 0)
+		$MoveResolver.do_move(global_position, 0)
 	else:
-		velocity.x = 0
+		velocity.x *= 0.9 * delta
 	
 	move_and_slide()
 
