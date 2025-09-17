@@ -1,9 +1,9 @@
 extends Area2D
 
-@export var start_up = 0.1
-@export var up_time = 0.1
-@export var end_lag = 0.1
-@onready var character = $"../.."
+@export var start_up := 0.1
+@export var up_time := 0.1
+@export var end_lag := 0.1
+@onready var character := $"../.."
 
 func _ready() -> void:
 	character.can_move = false

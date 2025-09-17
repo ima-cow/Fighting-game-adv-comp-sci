@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://douwo3m6epfnp"]
 
-[ext_resource type="Script" uid="uid://dmmkpendim0ea" path="res://scripts/player_movement.gd" id="1_w4fov"]
+[ext_resource type="Script" uid="uid://dmmkpendim0ea" path="res://scripts/player.gd" id="1_w4fov"]
 [ext_resource type="Script" uid="uid://debrlwtgoufjc" path="res://scripts/move_resolver.gd" id="2_qljkb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k366a"]
