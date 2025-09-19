@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lqbhf"]
 size = Vector2(1536, 880)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ehygr"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_iaxrx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iaxrx"]
 size = Vector2(1216, 160)
@@ -36,7 +36,7 @@ metadata/is_platform = false
 [node name="Sprite2D" type="Sprite2D" parent="Stage/Floor"]
 position = Vector2(3.8147e-05, 32)
 scale = Vector2(1216, 160)
-texture = SubResource("PlaceholderTexture2D_ehygr")
+texture = SubResource("PlaceholderTexture2D_iaxrx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Floor"]
 position = Vector2(0, 32)
