@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const JUMP_VELOCITY := -800.0
+const JUMP_VELOCITY := -400.0
 @export var speed := 400.0
 @export var health := 100.0
 var can_move := true
@@ -8,13 +8,19 @@ var can_move := true
 func _ready() -> void:
 	$"../PlayArea".body_shape_exited.connect(_on_play_area_body_shaped_exited)
 
+var jump_holding_amount := 1.0
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
 	if can_move:
-		if Input.is_action_just_pressed("jump") and is_on_floor():
-			velocity.y = JUMP_VELOCITY
+		if Input.is_action_pressed("jump"):
+			if jump_holding_amount < 2:
+				jump_holding_amount += 4 * delta
+		
+		if Input.is_action_just_released("jump") and is_on_floor():
+			velocity.y = JUMP_VELOCITY * jump_holding_amount
+			jump_holding_amount = 1
 		
 		var direction := Input.get_axis("move_left", "move_right")
 		if direction:
