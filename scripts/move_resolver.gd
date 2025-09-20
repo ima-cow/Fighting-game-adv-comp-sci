@@ -8,17 +8,17 @@ class_name MoveResolver extends Node
 @export var special_1 := preload("res://scenes/moves/blank_move.tscn")
 @export var special_2 := preload("res://scenes/moves/blank_move.tscn")
 
-var player_position
-var player_direction
+var player_position: Vector2
 
 func instantiate_move(selected_move: PackedScene):
-	var move = selected_move.instantiate()
+	var move: Area2D = selected_move.instantiate()
 	add_child(move)
 	move.global_position = player_position
 
-func do_move(position: Vector2, direction: int):
+func do_move(position: Vector2):
 	player_position = position
-	player_direction = direction
+	#spagetti code :/
+	#lmk if you know any better way to do this
 	if Input.is_action_just_pressed("jab") && !Input.is_action_pressed("move_left") && !Input.is_action_pressed("move_right"):
 		instantiate_move(jab)
 		print("jab")
