@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c0kr2n53oj88i"
-path="res://.godot/imported/FG_Ninja.png-f5ab9f3d3fdd8f47328bc9f95291c224.ctex"
+path="res://.godot/imported/FG_Ninja.png-45ae07b6e446341e471813d6f2dc3d2f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scripts/FG_Ninja.png"
-dest_files=["res://.godot/imported/FG_Ninja.png-f5ab9f3d3fdd8f47328bc9f95291c224.ctex"]
+source_file="res://assets/FG_Ninja.png"
+dest_files=["res://.godot/imported/FG_Ninja.png-45ae07b6e446341e471813d6f2dc3d2f.ctex"]
 
 [params]
 
