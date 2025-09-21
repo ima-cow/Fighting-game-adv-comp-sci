@@ -2,25 +2,24 @@
 
 [ext_resource type="Script" uid="uid://dmmkpendim0ea" path="res://scripts/player.gd" id="1_got4c"]
 [ext_resource type="Script" uid="uid://debrlwtgoufjc" path="res://scripts/move_resolver.gd" id="2_4i837"]
+[ext_resource type="Texture2D" uid="uid://c0kr2n53oj88i" path="res://assets/FG_Ninja.png" id="2_phu2e"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k366a"]
 radius = 16.0
-height = 64.0
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_78yxw"]
+height = 80.0
 
 [node name="Ninja" type="CharacterBody2D"]
 script = ExtResource("1_got4c")
 metadata/SPEED = 0
 metadata/JUMP_SPEED = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_k366a")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(4.76837e-07, 0)
-scale = Vector2(48, 64)
-texture = SubResource("PlaceholderTexture2D_78yxw")
+scale = Vector2(3, 3)
+texture = ExtResource("2_phu2e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("CapsuleShape2D_k366a")
 
 [node name="MoveResolver" type="Node" parent="."]
 script = ExtResource("2_4i837")
