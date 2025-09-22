@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpwdqq1ouhs0v"
-path="res://.godot/imported/FG_Ninja.png-5c09565bcd7cc13e709cb9675eeba62e.ctex"
+uid="uid://dnf1qy7ka7e45"
+path="res://.godot/imported/FG_BHG.png-32c158ce022690db772823d2af2f40e3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/FG_Ninja.png"
-dest_files=["res://.godot/imported/FG_Ninja.png-5c09565bcd7cc13e709cb9675eeba62e.ctex"]
+source_file="res://assets/FG_BHG.png"
+dest_files=["res://.godot/imported/FG_BHG.png-32c158ce022690db772823d2af2f40e3.ctex"]
 
 [params]
 

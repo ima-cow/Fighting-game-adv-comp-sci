@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnf1qy7ka7e45"
-path="res://.godot/imported/FG_BHG.png-9018c8062862effb47d9f3cde37db7ed.ctex"
+uid="uid://bfx7x65b4l3cp"
+path="res://.godot/imported/FG_Cowboy.png-eacffe3480e52aab3d10bfde9a44fc66.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/FG_BHG.png"
-dest_files=["res://.godot/imported/FG_BHG.png-9018c8062862effb47d9f3cde37db7ed.ctex"]
+source_file="res://assets/FG_Cowboy.png"
+dest_files=["res://.godot/imported/FG_Cowboy.png-eacffe3480e52aab3d10bfde9a44fc66.ctex"]
 
 [params]
 
