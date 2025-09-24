@@ -86,7 +86,11 @@ func _on_big_hands_button_pressed():
 func sync_stages():
 	add_child(waiting_screen.instantiate())
 	ready_for_stage = true
-	attempt_to_instantiate_stage.rpc_id(multiplayer.get_peers()[0])
+	if not multiplayer.get_peers().is_empty():
+		attempt_to_instantiate_stage.rpc_id(multiplayer.get_peers()[0])
+	else:
+		await multiplayer.peer_connected
+		attempt_to_instantiate_stage.rpc_id(multiplayer.get_peers()[0])
 
 @rpc("any_peer", "call_local")
 func attempt_to_instantiate_stage():
@@ -96,13 +100,15 @@ func attempt_to_instantiate_stage():
 		else:
 			call_instantiate_stage.rpc_id(1)
 
+# called on the other peer loaded into the game when this peer has completed character selection
+# checks to see if the other player is ready for the stage, and if it is instantiates it
 @rpc("authority", "call_local")
 func instantiate_stage(stage: int):
 	if $WaitingScreen != null:
 		$WaitingScreen.queue_free()
 	add_child(stage_scenes[stage].instantiate())
 	if multiplayer.is_server():
-		instantiate_player(selected_character)
+		instantiate_player.rpc_id(1, selected_character)
 	else:
 		instantiate_player.rpc_id(1, selected_character)
 
@@ -112,12 +118,14 @@ func instantiate_stage(stage: int):
 func call_instantiate_stage():
 	instantiate_stage.rpc(selected_stage)
 
-# called on the other peer loaded into the game when this peer has completed character selection
-# checks to see if the other player is ready for the stage, and if it is instantiates it
-
 @rpc("any_peer", "call_local")
 func instantiate_player(character: int):
-	var player_to_instantiate = character_scenes[character].instantiate()
+	var player_to_instantiate := character_scenes[character].instantiate()
 	player_to_instantiate.player_id = multiplayer.get_unique_id()
 	player_to_instantiate.name = str(multiplayer.get_unique_id())
+	const STARTING_POSITION := 300
+	if multiplayer.get_remote_sender_id() == 1:
+		player_to_instantiate.global_position.x = -STARTING_POSITION
+	else:
+		player_to_instantiate.global_position.x = STARTING_POSITION
 	$PlayerResolver.add_child(player_to_instantiate, true)
