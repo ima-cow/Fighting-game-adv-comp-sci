@@ -6,6 +6,10 @@ const JUMP_MULTIPLIER := 2
 @export var health := 100.0
 var can_move := true
 
+@export var player_id := 1:
+	set(id):
+		player_id = id
+
 #func _ready() -> void:
 	#$"../PlayArea".body_shape_exited.connect(_on_play_area_body_shaped_exited)
 
@@ -28,7 +32,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, speed)
 		
-		move_through_platform()
+		#move_through_platform()
 		$MoveResolver.do_move(global_position)
 	else:
 		velocity.x *= 0.8
@@ -37,22 +41,22 @@ func _physics_process(delta: float) -> void:
 
 var first_recent_colision: StaticBody2D 
 var second_recent_colision: StaticBody2D
-func move_through_platform():
-	if get_slide_collision_count() == 0:
-		return
-	
-	if get_slide_collision(0) != null:
-		first_recent_colision = get_slide_collision(0).get_collider()
-	
-	if Input.is_action_pressed("move_down") and is_on_floor():
-		if first_recent_colision.get_meta("is_platform"):
-			first_recent_colision.get_child(1).disabled = true
-			second_recent_colision = first_recent_colision
-	
-	if second_recent_colision != null:
-		if !first_recent_colision.get_meta("is_platform") and second_recent_colision.get_meta("is_platform"):
-			second_recent_colision.get_child(1).disabled = false
-			second_recent_colision = first_recent_colision
+#func move_through_platform():
+	#if get_slide_collision_count() == 0:
+		#return
+	#
+	#if get_slide_collision(0) != null:
+		#first_recent_colision = get_slide_collision(0).get_collider()
+	#
+	#if Input.is_action_pressed("move_down") and is_on_floor():
+		#if first_recent_colision.get_meta("is_platform"):
+			#first_recent_colision.get_child(1).disabled = true
+			#second_recent_colision = first_recent_colision
+	#
+	#if second_recent_colision != null:
+		#if !first_recent_colision.get_meta("is_platform") and second_recent_colision.get_meta("is_platform"):
+			#second_recent_colision.get_child(1).disabled = false
+			#second_recent_colision = first_recent_colision
 
 func _process(_delta: float) -> void:
 	if health <= 0:

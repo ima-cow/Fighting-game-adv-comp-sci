@@ -6,6 +6,7 @@ var character_selector := preload("res://scenes/ui/character_selector.tscn")
 var waiting_screen := preload("res://scenes/ui/waiting_screen.tscn")
 
 var stage_scenes: Array[PackedScene] = [preload("res://scenes/stages/ninja_gardens.tscn"), preload("res://scenes/stages/cowboy_desert.tscn"), preload("res://scenes/stages/big_hands_city.tscn")]
+var character_scenes: Array[PackedScene] = [preload("res://scenes/characters/ninja.tscn"), preload("res://scenes/characters/cowboy.tscn"), preload("res://scenes/characters/big_hands.tscn")]
 
 var ready_for_stage := false
 
@@ -87,11 +88,23 @@ func sync_stages():
 	ready_for_stage = true
 	attempt_to_instantiate_stage.rpc_id(multiplayer.get_peers()[0])
 
+@rpc("any_peer", "call_local")
+func attempt_to_instantiate_stage():
+	if ready_for_stage:
+		if multiplayer.is_server():
+			instantiate_stage.rpc(selected_stage)
+		else:
+			call_instantiate_stage.rpc_id(1)
+
 @rpc("authority", "call_local")
 func instantiate_stage(stage: int):
 	if $WaitingScreen != null:
 		$WaitingScreen.queue_free()
 	add_child(stage_scenes[stage].instantiate())
+	if multiplayer.is_server():
+		instantiate_player(selected_character)
+	else:
+		instantiate_player.rpc_id(1, selected_character)
 
 # used to call instantiate_stage from the client because 
 # it needs to be done on the server so it can access the selected stage
@@ -101,10 +114,10 @@ func call_instantiate_stage():
 
 # called on the other peer loaded into the game when this peer has completed character selection
 # checks to see if the other player is ready for the stage, and if it is instantiates it
+
 @rpc("any_peer", "call_local")
-func attempt_to_instantiate_stage():
-	if ready_for_stage:
-		if multiplayer.is_server():
-			instantiate_stage.rpc(selected_stage)
-		else:
-			call_instantiate_stage.rpc_id(1)
+func instantiate_player(character: int):
+	var player_to_instantiate = character_scenes[character].instantiate()
+	player_to_instantiate.player_id = multiplayer.get_unique_id()
+	player_to_instantiate.name = str(multiplayer.get_unique_id())
+	$PlayerResolver.add_child(player_to_instantiate, true)

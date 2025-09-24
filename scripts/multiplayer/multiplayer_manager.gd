@@ -22,6 +22,7 @@ func join_as_player_2():
 
 func _on_peer_connected(id: int):
 	print("player %s has joined" % id)
+	print("i am", multiplayer.get_unique_id())
 
 func _on_peer_disconnected(id: int):
 	print("player %s has left" % id)
