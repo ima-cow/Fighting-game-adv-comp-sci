@@ -25,3 +25,4 @@ func _on_peer_connected(id: int):
 
 func _on_peer_disconnected(id: int):
 	print("player %s has left" % id)
+	

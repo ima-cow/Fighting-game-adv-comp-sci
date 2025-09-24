@@ -121,8 +121,8 @@ func call_instantiate_stage():
 @rpc("any_peer", "call_local")
 func instantiate_player(character: int):
 	var player_to_instantiate := character_scenes[character].instantiate()
-	player_to_instantiate.player_id = multiplayer.get_unique_id()
-	player_to_instantiate.name = str(multiplayer.get_unique_id())
+	player_to_instantiate.player_id = multiplayer.get_remote_sender_id()
+	player_to_instantiate.name = str(multiplayer.get_remote_sender_id())
 	const STARTING_POSITION := 300
 	if multiplayer.get_remote_sender_id() == 1:
 		player_to_instantiate.global_position.x = -STARTING_POSITION

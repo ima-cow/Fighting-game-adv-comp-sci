@@ -1,8 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://dmslc11hhyyu"]
+[gd_scene load_steps=8 format=3 uid="uid://dmslc11hhyyu"]
 
 [ext_resource type="Script" uid="uid://dmmkpendim0ea" path="res://scripts/player.gd" id="1_got4c"]
 [ext_resource type="Script" uid="uid://debrlwtgoufjc" path="res://scripts/move_resolver.gd" id="2_4i837"]
 [ext_resource type="Texture2D" uid="uid://bpwdqq1ouhs0v" path="res://assets/FG_Ninja.png" id="2_phu2e"]
+[ext_resource type="Script" uid="uid://by108irccvfnu" path="res://scripts/multiplayer/input_synchronizer.gd" id="2_wv722"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wv722"]
+properties/0/path = NodePath(".:health")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:player_id")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:position")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_phu2e"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k366a"]
 radius = 13.0
@@ -12,6 +26,13 @@ height = 76.0
 script = ExtResource("1_got4c")
 metadata/SPEED = 0
 metadata/JUMP_SPEED = 0
+
+[node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_wv722")
+
+[node name="InputSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_phu2e")
+script = ExtResource("2_wv722")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)

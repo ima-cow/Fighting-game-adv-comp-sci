@@ -9,12 +9,17 @@ var can_move := true
 @export var player_id := 1:
 	set(id):
 		player_id = id
+		$InputSynchronizer.set_multiplayer_authority(id)
 
 #func _ready() -> void:
 	#$"../PlayArea".body_shape_exited.connect(_on_play_area_body_shaped_exited)
 
 var jump_holding_amount := 1.0
 func _physics_process(delta: float) -> void:
+	if multiplayer.is_server():
+		apply_movement_from_input(delta)
+
+func apply_movement_from_input(delta: float):
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
@@ -26,7 +31,7 @@ func _physics_process(delta: float) -> void:
 			velocity.y = JUMP_VELOCITY * jump_holding_amount
 			jump_holding_amount = 1
 		
-		var direction := Input.get_axis("move_left", "move_right")
+		var direction = $InputSynchronizer.input_direction
 		if direction:
 			velocity.x = direction * speed
 		else:
