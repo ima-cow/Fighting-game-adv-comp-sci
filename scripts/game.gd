@@ -87,16 +87,19 @@ func sync_stages():
 	attempt_to_instantiate_stage.rpc_id(multiplayer.get_peers()[0])
 
 @rpc("authority", "call_local")
-func instantiate_stage():
+func instantiate_stage(stage: int):
 	if $WaitingScreen != null:
 		$WaitingScreen.queue_free()
-	add_child(stage_scenes[selected_stage].instantiate())
+	add_child(stage_scenes[stage].instantiate())
 
 @rpc("any_peer", "call_local")
 func call_instantiate_stage():
-	instantiate_stage.rpc()
+	instantiate_stage.rpc(selected_stage)
 
 @rpc("any_peer", "call_local")
 func attempt_to_instantiate_stage():
 	if ready_for_stage:
-		call_instantiate_stage.rpc()
+		if multiplayer.is_server():
+			instantiate_stage.rpc(selected_stage)
+		else:
+			call_instantiate_stage.rpc_id(1)
