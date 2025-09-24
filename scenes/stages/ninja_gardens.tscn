@@ -1,6 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://djh5dkaqq22v"]
-
-[ext_resource type="Script" uid="uid://w8014pexwe8y" path="res://scripts/stage.gd" id="1_k1bxl"]
+[gd_scene load_steps=6 format=3 uid="uid://djh5dkaqq22v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_78yxw"]
 size = Vector2(1536, 880)
@@ -16,7 +14,6 @@ size = Vector2(1024, 160)
 size = Vector2(288, 26)
 
 [node name="NinjaGardens" type="Node"]
-script = ExtResource("1_k1bxl")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 

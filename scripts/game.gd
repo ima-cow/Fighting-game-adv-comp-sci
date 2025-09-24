@@ -22,6 +22,7 @@ enum stages {
 }
 
 var selected_character := -1
+# selected_stage will stay as -1 on the client
 var selected_stage := -1
 
 func _ready() -> void:
@@ -92,10 +93,14 @@ func instantiate_stage(stage: int):
 		$WaitingScreen.queue_free()
 	add_child(stage_scenes[stage].instantiate())
 
+# used to call instantiate_stage from the client because 
+# it needs to be done on the server so it can access the selected stage
 @rpc("any_peer", "call_local")
 func call_instantiate_stage():
 	instantiate_stage.rpc(selected_stage)
 
+# called on the other peer loaded into the game when this peer has completed character selection
+# checks to see if the other player is ready for the stage, and if it is instantiates it
 @rpc("any_peer", "call_local")
 func attempt_to_instantiate_stage():
 	if ready_for_stage:
