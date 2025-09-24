@@ -1,8 +1,13 @@
 extends Node
 
-var server_connector := preload("res://scenes/server_connector.tscn")
-var stage_selector := preload("res://scenes/stage_selector.tscn")
-var character_selector := preload("res://scenes/character_selector.tscn")
+var server_connector := preload("res://scenes/ui/server_connector.tscn")
+var stage_selector := preload("res://scenes/ui/stage_selector.tscn")
+var character_selector := preload("res://scenes/ui/character_selector.tscn")
+var waiting_screen := preload("res://scenes/ui/waiting_screen.tscn")
+
+var stage_scenes: Array[PackedScene] = [preload("res://scenes/stages/ninja_gardens.tscn"), preload("res://scenes/stages/cowboy_desert.tscn"), preload("res://scenes/stages/big_hands_city.tscn")]
+
+var ready_for_stage := false
 
 enum characters {
 	NINJA,
@@ -16,8 +21,8 @@ enum stages {
 	BIG_HANDS_CITY
 }
 
-var selected_character: int
-var selected_stage: int
+var selected_character := -1
+var selected_stage := -1
 
 func _ready() -> void:
 	add_child(server_connector.instantiate())
@@ -27,10 +32,12 @@ func _ready() -> void:
 func _on_host_game_pressed():
 	$ServerConnector.queue_free()
 	select_stage()
+	MultiplayerManager.become_host()
 
 func _on_join_game_pressed():
 	$ServerConnector.queue_free()
 	select_character()
+	MultiplayerManager.join_as_player_2()
 
 func select_stage():
 	add_child(stage_selector.instantiate())
@@ -62,11 +69,34 @@ func _on_big_hands_city_button_pressed():
 func _on_ninja_button_pressed():
 	selected_character = characters.NINJA
 	$CharacterSelector.queue_free()
+	sync_stages()
 
 func _on_cowboy_button_pressed():
 	selected_character = characters.COWBOY
 	$CharacterSelector.queue_free()
+	sync_stages()
 
 func _on_big_hands_button_pressed():
 	selected_character = characters.BIG_HANDS
 	$CharacterSelector.queue_free()
+	sync_stages()
+
+func sync_stages():
+	add_child(waiting_screen.instantiate())
+	ready_for_stage = true
+	attempt_to_instantiate_stage.rpc_id(multiplayer.get_peers()[0])
+
+@rpc("authority", "call_local")
+func instantiate_stage():
+	if $WaitingScreen != null:
+		$WaitingScreen.queue_free()
+	add_child(stage_scenes[selected_stage].instantiate())
+
+@rpc("any_peer", "call_local")
+func call_instantiate_stage():
+	instantiate_stage.rpc()
+
+@rpc("any_peer", "call_local")
+func attempt_to_instantiate_stage():
+	if ready_for_stage:
+		call_instantiate_stage.rpc()
