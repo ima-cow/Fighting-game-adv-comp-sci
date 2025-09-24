@@ -31,7 +31,7 @@ func apply_movement_from_input(delta: float):
 			velocity.x = direction * speed
 		else:
 			velocity.x = move_toward(velocity.x, 0, speed)
-		
+			
 		move_through_platform()
 		$MoveResolver.do_move(global_position)
 	else:
