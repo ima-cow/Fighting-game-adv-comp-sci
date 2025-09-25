@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://douwo3m6epfnp"]
+[gd_scene load_steps=6 format=3 uid="uid://douwo3m6epfnp"]
 
 [ext_resource type="Script" uid="uid://dmmkpendim0ea" path="res://scripts/player.gd" id="1_w4fov"]
 [ext_resource type="Texture2D" uid="uid://bfx7x65b4l3cp" path="res://assets/FG_Cowboy.png" id="2_l0180"]
 [ext_resource type="Script" uid="uid://debrlwtgoufjc" path="res://scripts/move_resolver.gd" id="2_qljkb"]
+[ext_resource type="PackedScene" uid="uid://ci00djhpub8kb" path="res://scenes/player_synchronizer.tscn" id="2_ubx2d"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k366a"]
 radius = 13.0
@@ -24,3 +25,5 @@ texture = ExtResource("2_l0180")
 
 [node name="MoveResolver" type="Node" parent="."]
 script = ExtResource("2_qljkb")
+
+[node name="PlayerSynchronizer" parent="." instance=ExtResource("2_ubx2d")]

@@ -12,6 +12,8 @@ const SERVER := 1
 @export var player_id := -1:
 	set(id):
 		player_id = id
+		print($PlayerSynchronizer)
+		$PlayerSynchronizer.set_multiplayer_authority(id)
 
 func _ready() -> void:
 	if not multiplayer.is_server():
@@ -24,9 +26,7 @@ func _ready() -> void:
 
 var jump_holding_amount := 1.0
 func _physics_process(delta: float) -> void:
-	pass
-	#_do_player_actions(delta)
-
+	_do_player_actions(delta)
 
 func _do_player_actions(delta: float):
 	if not is_on_floor():
@@ -53,7 +53,6 @@ func _do_player_actions(delta: float):
 	
 	move_and_slide()
 
-
 var first_recent_colision: StaticBody2D 
 var second_recent_colision: StaticBody2D
 func _move_through_platform():
@@ -72,7 +71,6 @@ func _move_through_platform():
 		if !first_recent_colision.get_meta("is_platform") and second_recent_colision.get_meta("is_platform"):
 			second_recent_colision.get_child(1).disabled = false
 			second_recent_colision = first_recent_colision
-
 
 func _process(_delta: float) -> void:
 	if health <= 0:
