@@ -117,15 +117,6 @@ func instantiate_stage(stage: int):
 @rpc("any_peer", "call_local")
 func instantiate_player(character: int):
 	var player_to_instantiate := character_scenes[character].instantiate()
-	print("sender is ", multiplayer.get_remote_sender_id())
-	print("client is ", multiplayer.get_unique_id())
 	player_to_instantiate.player_id = multiplayer.get_remote_sender_id()
 	player_to_instantiate.name = str(multiplayer.get_remote_sender_id())
-	#if multiplayer.get_remote_sender_id() == SERVER:
-		#player_to_instantiate.player_id = SERVER
-		#player_to_instantiate.name = str(SERVER)
-	#else:
-		#player_to_instantiate.player_id = multiplayer.get_remote_sender_id()
-		#player_to_instantiate.name = str(multiplayer.get_remote_sender_id())
-	#print("setting id ",player_to_instantiate.player_id," setting name ", player_to_instantiate.name)
 	$PlayerResolver.add_child(player_to_instantiate, true)

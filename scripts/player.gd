@@ -6,10 +6,11 @@ const JUMP_MULTIPLIER := 2
 @export var health := 100.0
 var can_move := true
 
-@export var player_id := -1
+@export var player_id := -1:
+	set(id):
+		player_id = id
 
 func _ready() -> void:
-	print("my id is: ",player_id, " my client is: ", multiplayer.get_unique_id())
 	if player_id == multiplayer.get_unique_id():
 		pass
 
