@@ -1,4 +1,7 @@
 extends Node
 
+signal player_id_set
+
 func _on_multiplayer_spawner_spawned(node: Node) -> void:
 	node.player_id = node.name
+	player_id_set.emit()

@@ -5,14 +5,22 @@ const JUMP_MULTIPLIER := 2
 @export var speed := 400.0
 @export var health := 100.0
 var can_move := true
+const SPAWN_DISPLACEMENT := 300
+
+const SERVER := 1
 
 @export var player_id := -1:
 	set(id):
 		player_id = id
 
 func _ready() -> void:
-	if player_id == multiplayer.get_unique_id():
-		pass
+	if not multiplayer.is_server():
+		await $"..".player_id_set
+	
+	if player_id == SERVER:
+		position.x = SPAWN_DISPLACEMENT
+	else:
+		position.x = -SPAWN_DISPLACEMENT
 
 var jump_holding_amount := 1.0
 func _physics_process(delta: float) -> void:
