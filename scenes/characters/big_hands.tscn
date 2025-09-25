@@ -1,34 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dtjm3krq2hla"]
+[gd_scene load_steps=5 format=3 uid="uid://dtjm3krq2hla"]
 
 [ext_resource type="Script" uid="uid://dmmkpendim0ea" path="res://scripts/player.gd" id="1_qudrh"]
 [ext_resource type="Script" uid="uid://debrlwtgoufjc" path="res://scripts/move_resolver.gd" id="2_8b2gc"]
 [ext_resource type="Texture2D" uid="uid://dnf1qy7ka7e45" path="res://assets/FG_BHG.png" id="2_mc4gd"]
-[ext_resource type="Script" uid="uid://by108irccvfnu" path="res://scripts/multiplayer/input_synchronizer.gd" id="2_r0s2u"]
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mc4gd"]
-properties/0/path = NodePath(".:health")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath(".:player_id")
-properties/1/spawn = true
-properties/1/replication_mode = 1
-properties/2/path = NodePath(".:position")
-properties/2/spawn = true
-properties/2/replication_mode = 1
-properties/3/path = NodePath("Sprite2D:flip_h")
-properties/3/spawn = true
-properties/3/replication_mode = 1
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8b2gc"]
-properties/0/path = NodePath("InputSynchronizer:input_direction")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath("InputSynchronizer:jump_released")
-properties/1/spawn = true
-properties/1/replication_mode = 1
-properties/2/path = NodePath("InputSynchronizer:jump_holding_amount")
-properties/2/spawn = true
-properties/2/replication_mode = 1
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k366a"]
 radius = 16.0
@@ -38,13 +12,6 @@ height = 64.0
 script = ExtResource("1_qudrh")
 metadata/SPEED = 0
 metadata/JUMP_SPEED = 0
-
-[node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_mc4gd")
-
-[node name="InputSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_8b2gc")
-script = ExtResource("2_r0s2u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_k366a")

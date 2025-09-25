@@ -10,6 +10,8 @@ var character_scenes: Array[PackedScene] = [preload("res://scenes/characters/nin
 
 var ready_for_stage := false
 
+const SERVER := 1
+
 enum characters {
 	NINJA,
 	COWBOY,
@@ -86,46 +88,44 @@ func _on_big_hands_button_pressed():
 func sync_stages():
 	add_child(waiting_screen.instantiate())
 	ready_for_stage = true
+	var other_peer = multiplayer.get_peers()[0]
 	if not multiplayer.get_peers().is_empty():
-		attempt_to_instantiate_stage.rpc_id(multiplayer.get_peers()[0])
+		attempt_to_instantiate_stage.rpc_id(other_peer)
 	else:
 		await multiplayer.peer_connected
-		attempt_to_instantiate_stage.rpc_id(multiplayer.get_peers()[0])
+		attempt_to_instantiate_stage.rpc_id(other_peer)
 
+# called with context that the other peer is ready for the stage
 @rpc("any_peer", "call_local")
 func attempt_to_instantiate_stage():
 	if ready_for_stage:
-		if multiplayer.is_server():
-			instantiate_stage.rpc(selected_stage)
-		else:
-			call_instantiate_stage.rpc_id(1)
+		call_instantiate_stage.rpc_id(SERVER)
 
-# called on the other peer loaded into the game when this peer has completed character selection
-# checks to see if the other player is ready for the stage, and if it is instantiates it
+# used to call instantiate_stage because it needs to be done on the server so it can access the selected stage
+@rpc("any_peer", "call_local")
+func call_instantiate_stage():
+	instantiate_stage.rpc(selected_stage)
+
 @rpc("authority", "call_local")
 func instantiate_stage(stage: int):
 	if $WaitingScreen != null:
 		$WaitingScreen.queue_free()
 	add_child(stage_scenes[stage].instantiate())
-	if multiplayer.is_server():
-		instantiate_player.rpc_id(1, selected_character)
-	else:
-		instantiate_player.rpc_id(1, selected_character)
-
-# used to call instantiate_stage from the client because 
-# it needs to be done on the server so it can access the selected stage
-@rpc("any_peer", "call_local")
-func call_instantiate_stage():
-	instantiate_stage.rpc(selected_stage)
+	instantiate_player.rpc_id(SERVER, selected_character)
+	#instantiate_player(selected_character)
 
 @rpc("any_peer", "call_local")
 func instantiate_player(character: int):
 	var player_to_instantiate := character_scenes[character].instantiate()
+	print("sender is ", multiplayer.get_remote_sender_id())
+	print("client is ", multiplayer.get_unique_id())
 	player_to_instantiate.player_id = multiplayer.get_remote_sender_id()
 	player_to_instantiate.name = str(multiplayer.get_remote_sender_id())
-	const STARTING_POSITION := 300
-	if multiplayer.get_remote_sender_id() == 1:
-		player_to_instantiate.global_position.x = -STARTING_POSITION
-	else:
-		player_to_instantiate.global_position.x = STARTING_POSITION
+	#if multiplayer.get_remote_sender_id() == SERVER:
+		#player_to_instantiate.player_id = SERVER
+		#player_to_instantiate.name = str(SERVER)
+	#else:
+		#player_to_instantiate.player_id = multiplayer.get_remote_sender_id()
+		#player_to_instantiate.name = str(multiplayer.get_remote_sender_id())
+	#print("setting id ",player_to_instantiate.player_id," setting name ", player_to_instantiate.name)
 	$PlayerResolver.add_child(player_to_instantiate, true)
