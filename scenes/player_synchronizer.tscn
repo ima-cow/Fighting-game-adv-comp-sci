@@ -4,6 +4,9 @@
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
+properties/1/path = NodePath("Sprite2D:flip_h")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [node name="PlayerSynchronizer" type="MultiplayerSynchronizer"]
 replication_config = SubResource("SceneReplicationConfig_phu2e")
