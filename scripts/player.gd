@@ -9,16 +9,13 @@ const SPAWN_DISPLACEMENT := 300
 
 const SERVER := 1
 
-@export var player_id := -1:
-	set(id):
-		player_id = id
-		print($PlayerSynchronizer)
-		$PlayerSynchronizer.set_multiplayer_authority(id)
+@export var player_id := -1
+
+func _enter_tree() -> void:
+	$PlayerSynchronizer.set_multiplayer_authority(int(name))
+	player_id = int(name)
 
 func _ready() -> void:
-	if not multiplayer.is_server():
-		await $"..".player_id_set
-	
 	if player_id == SERVER:
 		position.x = SPAWN_DISPLACEMENT
 	else:
@@ -26,7 +23,8 @@ func _ready() -> void:
 
 var jump_holding_amount := 1.0
 func _physics_process(delta: float) -> void:
-	_do_player_actions(delta)
+	if player_id == multiplayer.get_unique_id():
+		_do_player_actions(delta)
 
 func _do_player_actions(delta: float):
 	if not is_on_floor():

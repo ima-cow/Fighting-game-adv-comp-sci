@@ -5,8 +5,17 @@ var stage_selector := preload("res://scenes/ui/stage_selector.tscn")
 var character_selector := preload("res://scenes/ui/character_selector.tscn")
 var waiting_screen := preload("res://scenes/ui/waiting_screen.tscn")
 
-var stage_scenes: Array[PackedScene] = [preload("res://scenes/stages/ninja_gardens.tscn"), preload("res://scenes/stages/cowboy_desert.tscn"), preload("res://scenes/stages/big_hands_city.tscn")]
-var character_scenes: Array[PackedScene] = [preload("res://scenes/characters/ninja.tscn"), preload("res://scenes/characters/cowboy.tscn"), preload("res://scenes/characters/big_hands.tscn")]
+var stage_scenes: Array[PackedScene] = [
+	preload("res://scenes/stages/ninja_gardens.tscn"), 
+	preload("res://scenes/stages/cowboy_desert.tscn"), 
+	preload("res://scenes/stages/big_hands_city.tscn")
+]
+
+var character_scenes: Array[PackedScene] = [
+	preload("res://scenes/characters/ninja.tscn"),
+	preload("res://scenes/characters/cowboy.tscn"),
+	preload("res://scenes/characters/big_hands.tscn")
+]
 
 var ready_for_stage := false
 
@@ -117,6 +126,5 @@ func instantiate_stage(stage: int):
 @rpc("any_peer", "call_local")
 func instantiate_player(character: int):
 	var player_to_instantiate := character_scenes[character].instantiate()
-	player_to_instantiate.player_id = multiplayer.get_remote_sender_id()
 	player_to_instantiate.name = str(multiplayer.get_remote_sender_id())
 	$PlayerResolver.add_child(player_to_instantiate, true)
