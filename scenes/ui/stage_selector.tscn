@@ -1,0 +1,82 @@
+[gd_scene load_steps=2 format=3 uid="uid://d24hy0xsanu6q"]
+
+[ext_resource type="Texture2D" uid="uid://qdjli3urk4tm" path="res://icon.svg" id="2_disgg"]
+
+[node name="StageSelector" type="Control"]
+custom_minimum_size = Vector2(1152, 648)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/HBoxContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="NinjaGardensButton" type="TextureButton" parent="CenterContainer/HBoxContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_disgg")
+
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Ninja Gadens"
+horizontal_alignment = 1
+
+[node name="CenterContainer2" type="CenterContainer" parent="CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/HBoxContainer/CenterContainer2"]
+layout_mode = 2
+
+[node name="CowboyDesertButton" type="TextureButton" parent="CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_disgg")
+
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Cowboy Dessert"
+horizontal_alignment = 1
+
+[node name="CenterContainer3" type="CenterContainer" parent="CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/HBoxContainer/CenterContainer3"]
+layout_mode = 2
+
+[node name="BigHandsCityButton" type="TextureButton" parent="CenterContainer/HBoxContainer/CenterContainer3/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_disgg")
+
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/CenterContainer3/VBoxContainer"]
+layout_mode = 2
+text = "Big Hands City"
+horizontal_alignment = 1
+
+[connection signal="button_up" from="CenterContainer/HBoxContainer/CenterContainer/VBoxContainer/NinjaGardensButton" to="." method="_on_ninja_gardens_button_button_up"]
+[connection signal="button_up" from="CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer/CowboyDesertButton" to="." method="_on_cowboy_desert_button_button_up"]
+[connection signal="button_up" from="CenterContainer/HBoxContainer/CenterContainer3/VBoxContainer/BigHandsCityButton" to="." method="_on_big_hands_city_button_button_up"]

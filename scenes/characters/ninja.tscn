@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dmslc11hhyyu"]
+[gd_scene load_steps=6 format=3 uid="uid://dmslc11hhyyu"]
 
 [ext_resource type="Script" uid="uid://dmmkpendim0ea" path="res://scripts/player.gd" id="1_got4c"]
 [ext_resource type="Script" uid="uid://debrlwtgoufjc" path="res://scripts/move_resolver.gd" id="2_4i837"]
-[ext_resource type="Texture2D" uid="uid://c0kr2n53oj88i" path="res://assets/FG_Ninja.png" id="2_phu2e"]
+[ext_resource type="Texture2D" uid="uid://bpwdqq1ouhs0v" path="res://assets/FG_Ninja.png" id="2_phu2e"]
+[ext_resource type="PackedScene" uid="uid://ci00djhpub8kb" path="res://scenes/player_synchronizer.tscn" id="4_wv722"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k366a"]
 radius = 13.0
@@ -12,6 +13,8 @@ height = 76.0
 script = ExtResource("1_got4c")
 metadata/SPEED = 0
 metadata/JUMP_SPEED = 0
+
+[node name="PlayerSynchronizer" parent="." instance=ExtResource("4_wv722")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)

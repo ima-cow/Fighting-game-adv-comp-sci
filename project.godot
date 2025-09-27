@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Fighting Game Adv Comp Sci"
-run/main_scene="uid://d24hy0xsanu6q"
+run/main_scene="uid://cj2ohy1y3aod2"
 config/features=PackedStringArray("4.5")
 config/icon="res://icon.svg"
+
+[autoload]
+
+MultiplayerManager="*res://scripts/multiplayer_manager.gd"
 
 [input]
 
