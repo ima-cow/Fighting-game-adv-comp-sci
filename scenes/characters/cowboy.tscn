@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://douwo3m6epfnp"]
+[gd_scene load_steps=7 format=3 uid="uid://douwo3m6epfnp"]
 
 [ext_resource type="Script" uid="uid://dmmkpendim0ea" path="res://scripts/player.gd" id="1_w4fov"]
 [ext_resource type="Texture2D" uid="uid://bfx7x65b4l3cp" path="res://assets/FG_Cowboy.png" id="2_l0180"]
 [ext_resource type="Script" uid="uid://debrlwtgoufjc" path="res://scripts/move_resolver.gd" id="2_qljkb"]
-[ext_resource type="PackedScene" uid="uid://ci00djhpub8kb" path="res://scenes/player_synchronizer.tscn" id="2_ubx2d"]
+[ext_resource type="PackedScene" uid="uid://ci00djhpub8kb" path="res://scenes/multiplayer/player_synchronizer.tscn" id="2_ubx2d"]
+[ext_resource type="PackedScene" uid="uid://fe6g3ehg3x8c" path="res://scenes/multiplayer/move_spawner.tscn" id="3_ubx2d"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k366a"]
 radius = 13.0
@@ -13,6 +14,10 @@ height = 76.0
 script = ExtResource("1_w4fov")
 metadata/SPEED = 0
 metadata/JUMP_SPEED = 0
+
+[node name="PlayerSynchronizer" parent="." instance=ExtResource("2_ubx2d")]
+
+[node name="MoveSpawner" parent="." instance=ExtResource("3_ubx2d")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6)
@@ -25,5 +30,3 @@ texture = ExtResource("2_l0180")
 
 [node name="MoveResolver" type="Node" parent="."]
 script = ExtResource("2_qljkb")
-
-[node name="PlayerSynchronizer" parent="." instance=ExtResource("2_ubx2d")]

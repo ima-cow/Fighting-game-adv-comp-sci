@@ -14,7 +14,6 @@ var stage_scenes: Array[PackedScene] = [
 var character_scenes: Array[PackedScene] = [
 	preload("res://scenes/characters/ninja.tscn"),
 	preload("res://scenes/characters/cowboy.tscn"),
-	preload("res://scenes/characters/big_hands.tscn")
 ]
 
 var ready_for_stage := false
@@ -23,8 +22,7 @@ const SERVER := 1
 
 enum characters {
 	NINJA,
-	COWBOY,
-	BIG_HANDS
+	COWBOY
 }
 
 enum stages {
@@ -62,7 +60,6 @@ func select_character():
 	add_child(character_selector.instantiate())
 	$CharacterSelector/CenterContainer/HBoxContainer/CenterContainer/VBoxContainer/NinjaButton.pressed.connect(_on_ninja_button_pressed)
 	$CharacterSelector/CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer/CowboyButton.pressed.connect(_on_cowboy_button_pressed)
-	$CharacterSelector/CenterContainer/HBoxContainer/CenterContainer3/VBoxContainer/BigHandsButton.pressed.connect(_on_big_hands_button_pressed)
 
 func _on_ninja_gardens_button_pressed():
 	selected_stage = stages.NINJA_GARDENS
@@ -89,15 +86,10 @@ func _on_cowboy_button_pressed():
 	$CharacterSelector.queue_free()
 	sync_stages()
 
-func _on_big_hands_button_pressed():
-	selected_character = characters.BIG_HANDS
-	$CharacterSelector.queue_free()
-	sync_stages()
-
 func sync_stages():
 	add_child(waiting_screen.instantiate())
 	ready_for_stage = true
-	var other_peer = multiplayer.get_peers()[0]
+	var other_peer := multiplayer.get_peers()[0]
 	if not multiplayer.get_peers().is_empty():
 		attempt_to_instantiate_stage.rpc_id(other_peer)
 	else:
@@ -121,7 +113,6 @@ func instantiate_stage(stage: int):
 		$WaitingScreen.queue_free()
 	add_child(stage_scenes[stage].instantiate())
 	instantiate_player.rpc_id(SERVER, selected_character)
-	#instantiate_player(selected_character)
 
 @rpc("any_peer", "call_local")
 func instantiate_player(character: int):

@@ -18,10 +18,10 @@ func _ready() -> void:
 	queue_free()
 
 func _physics_process(_delta: float) -> void:
-	global_position = get_parent().get_parent().global_position
+	global_position = $"../..".global_position
 
 func _process(_delta: float) -> void:
-	if character.get_child(1).flip_h:
+	if $"../../Sprite2D".flip_h:
 		rotation_degrees = 180
 		$Sprite2D.flip_v = true
 	else:

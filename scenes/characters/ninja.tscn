@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dmslc11hhyyu"]
+[gd_scene load_steps=7 format=3 uid="uid://dmslc11hhyyu"]
 
 [ext_resource type="Script" uid="uid://dmmkpendim0ea" path="res://scripts/player.gd" id="1_got4c"]
 [ext_resource type="Script" uid="uid://debrlwtgoufjc" path="res://scripts/move_resolver.gd" id="2_4i837"]
 [ext_resource type="Texture2D" uid="uid://bpwdqq1ouhs0v" path="res://assets/FG_Ninja.png" id="2_phu2e"]
-[ext_resource type="PackedScene" uid="uid://ci00djhpub8kb" path="res://scenes/player_synchronizer.tscn" id="4_wv722"]
+[ext_resource type="PackedScene" uid="uid://fe6g3ehg3x8c" path="res://scenes/multiplayer/move_spawner.tscn" id="3_8d3cj"]
+[ext_resource type="PackedScene" uid="uid://ci00djhpub8kb" path="res://scenes/multiplayer/player_synchronizer.tscn" id="4_wv722"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k366a"]
 radius = 13.0
@@ -16,6 +17,8 @@ metadata/JUMP_SPEED = 0
 
 [node name="PlayerSynchronizer" parent="." instance=ExtResource("4_wv722")]
 
+[node name="MoveSpawner" parent="." instance=ExtResource("3_8d3cj")]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)
 shape = SubResource("CapsuleShape2D_k366a")
@@ -27,3 +30,5 @@ texture = ExtResource("2_phu2e")
 
 [node name="MoveResolver" type="Node" parent="."]
 script = ExtResource("2_4i837")
+
+[connection signal="spawned" from="MoveSpawner" to="MoveResolver" method="_on_move_spawner_spawned"]

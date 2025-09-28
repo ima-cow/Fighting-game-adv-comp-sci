@@ -40,3 +40,7 @@ func do_move(position: Vector2):
 	elif Input.is_action_just_pressed("special_2"):
 		instantiate_move(special_2)
 		print("special 2")
+
+
+func _on_move_spawner_spawned(node: Node) -> void:
+	pass # Replace with function body.

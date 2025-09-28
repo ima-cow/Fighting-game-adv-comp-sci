@@ -4,7 +4,6 @@ const JUMP_VELOCITY := -550.0
 const JUMP_MULTIPLIER := 2
 @export var speed := 400.0
 @export var health := 100.0
-var can_move := true
 const SPAWN_DISPLACEMENT := 300
 
 const SERVER := 1
@@ -12,8 +11,9 @@ const SERVER := 1
 @export var player_id := -1
 
 func _enter_tree() -> void:
-	$PlayerSynchronizer.set_multiplayer_authority(int(name))
 	player_id = int(name)
+	$PlayerSynchronizer.set_multiplayer_authority(player_id)
+	$MoveSpawner.set_multiplayer_authority(player_id)
 
 func _ready() -> void:
 	if player_id == SERVER:
@@ -21,11 +21,12 @@ func _ready() -> void:
 	else:
 		position.x = -SPAWN_DISPLACEMENT
 
-var jump_holding_amount := 1.0
 func _physics_process(delta: float) -> void:
 	if player_id == multiplayer.get_unique_id():
 		_do_player_actions(delta)
 
+var can_move := true
+var jump_holding_amount := 1.0
 func _do_player_actions(delta: float):
 	if not is_on_floor():
 		velocity += get_gravity() * delta
