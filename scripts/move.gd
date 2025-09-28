@@ -3,6 +3,8 @@ extends Area2D
 @export var start_up := 0.1
 @export var up_time := 0.1
 @export var end_lag := 0.1
+@export var damage := 10.0
+
 @onready var character := $"../.."
 
 func _ready() -> void:

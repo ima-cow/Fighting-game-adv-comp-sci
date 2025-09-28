@@ -30,3 +30,5 @@ texture = ExtResource("2_l0180")
 
 [node name="MoveResolver" type="Node" parent="."]
 script = ExtResource("2_qljkb")
+
+[connection signal="spawned" from="MoveSpawner" to="MoveResolver" method="_on_move_spawner_spawned"]
