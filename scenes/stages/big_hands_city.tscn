@@ -8,7 +8,7 @@ size = Vector2(1536, 880)
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_iaxrx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iaxrx"]
-size = Vector2(1216, 160)
+size = Vector2(1536, 160)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ki0ho"]
 
@@ -32,8 +32,8 @@ position = Vector2(0, 256)
 metadata/is_platform = false
 
 [node name="Sprite2D" type="Sprite2D" parent="Stage/Floor"]
-position = Vector2(3.8147e-05, 32)
-scale = Vector2(1216, 160)
+position = Vector2(1.5258789e-05, 32)
+scale = Vector2(1536.0001, 160)
 texture = SubResource("PlaceholderTexture2D_iaxrx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Floor"]
@@ -86,7 +86,7 @@ offset_right = -560.0
 offset_bottom = -312.0
 
 [node name="HUD2" parent="." instance=ExtResource("1_ehygr")]
-offset_left = 520.0
-offset_top = -312.0
-offset_right = 520.0
-offset_bottom = -312.0
+offset_left = 464.0
+offset_top = -304.0
+offset_right = 564.0
+offset_bottom = -254.0

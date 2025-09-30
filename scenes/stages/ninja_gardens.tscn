@@ -86,7 +86,7 @@ offset_right = -560.0
 offset_bottom = -312.0
 
 [node name="HUD2" parent="." instance=ExtResource("1_m4npe")]
-offset_left = 520.0
-offset_top = -312.0
-offset_right = 520.0
-offset_bottom = -312.0
+offset_left = 464.0
+offset_top = -304.0
+offset_right = 564.0
+offset_bottom = -254.0

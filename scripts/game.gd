@@ -1,5 +1,7 @@
 extends Node
 
+signal player_insantiated
+
 var server_connector := preload("res://scenes/ui/server_connector.tscn")
 var stage_selector := preload("res://scenes/ui/stage_selector.tscn")
 var waiting_screen := preload("res://scenes/ui/waiting_screen.tscn")
@@ -49,26 +51,30 @@ func _on_name_field_text_submitted(new_text: String):
 
 func _on_host_game_pressed():
 	$ServerConnector.queue_free()
+	add_name.rpc(name_field.text)
 	select_stage()
 	MultiplayerManager.become_host()
 
 func _on_join_game_pressed():
-	$ServerConnector.queue_free()
-	sync_stages()
 	if ip_address_field.has_ime_text():
 		MultiplayerManager.join_as_player_2(ip_address_field.text)
+		await multiplayer.connected_to_server
+		add_name.rpc(name_field.text)
 	else:
 		MultiplayerManager.join_as_player_2(ip_address_field.placeholder_text)
+		await multiplayer.connected_to_server
+		add_name.rpc(name_field.text)
+	$ServerConnector.queue_free()
+	sync_stages()
+
+@rpc("any_peer", "call_local")
+func add_name(name_to_add: String):
+	player_names[multiplayer.get_unique_id()] = name_to_add
 
 func select_stage():
 	add_child(stage_selector.instantiate())
 	$StageSelector.get_node("%NinjaGardensButton").pressed.connect(_on_ninja_gardens_button_pressed)
 	$StageSelector.get_node("%BigHandsCityButton").pressed.connect(_on_big_hands_city_button_pressed)
-
-#func select_character():
-	#add_child(character_selector.instantiate())
-	#$CharacterSelector/CenterContainer/HBoxContainer/CenterContainer/VBoxContainer/NinjaButton.pressed.connect(_on_ninja_button_pressed)
-	#$CharacterSelector/CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer/CowboyButton.pressed.connect(_on_cowboy_button_pressed)
 
 func _on_ninja_gardens_button_pressed():
 	selected_stage = stages.NINJA_GARDENS
@@ -79,16 +85,6 @@ func _on_big_hands_city_button_pressed():
 	selected_stage = stages.BIG_HANDS_CITY
 	$StageSelector.queue_free()
 	sync_stages()
-
-#func _on_ninja_button_pressed():
-	#selected_character = characters.NINJA
-	#$CharacterSelector.queue_free()
-	#sync_stages()
-
-#func _on_cowboy_button_pressed():
-	#selected_character = characters.COWBOY
-	#$CharacterSelector.queue_free()
-	#sync_stages()
 
 func sync_stages():
 	add_child(waiting_screen.instantiate())
@@ -122,3 +118,4 @@ func instantiate_player():
 	var player_to_instantiate := ninja.instantiate()
 	player_to_instantiate.name = str(multiplayer.get_remote_sender_id())
 	$PlayerResolver.add_child(player_to_instantiate, true)
+	player_insantiated.emit()
