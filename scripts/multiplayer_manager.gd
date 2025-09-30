@@ -1,7 +1,6 @@
 extends Node
 
 const SERVER_PORT := 8080
-const SERVER_IP := "127.0.0.1"
 
 func become_host():
 	print("starting server")
@@ -13,10 +12,10 @@ func become_host():
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 
-func join_as_player_2():
+func join_as_player_2(ip_address: String):
 	print("starting client")
 	var client_peer := ENetMultiplayerPeer.new()
-	client_peer.create_client(SERVER_IP, SERVER_PORT)
+	client_peer.create_client(ip_address, SERVER_PORT)
 	
 	multiplayer.multiplayer_peer = client_peer
 

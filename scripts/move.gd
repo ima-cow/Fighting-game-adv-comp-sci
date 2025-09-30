@@ -20,7 +20,7 @@ func _ready() -> void:
 	queue_free()
 
 func _physics_process(_delta: float) -> void:
-	global_position = $"../..".global_position
+	global_position = character.global_position
 
 func _process(_delta: float) -> void:
 	if $"../../Sprite2D".flip_h:

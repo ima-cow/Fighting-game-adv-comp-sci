@@ -7,7 +7,6 @@ const JUMP_MAX := 0.03
 const SPAWN_DISPLACEMENT := 300
 
 const SERVER := 1
-
 @export var player_id := -1
 
 func _enter_tree() -> void:
@@ -37,7 +36,7 @@ func _do_player_actions(delta: float):
 	if can_move:
 		if Input.is_action_pressed("jump") and can_jump:
 			if jump_holding_amount < JUMP_MAX:
-				velocity.y = JUMP_VELOCITY
+				velocity.y += JUMP_VELOCITY
 				jump_holding_amount += delta * 0.1
 		else:
 			jump_holding_amount = 0.0
@@ -62,7 +61,7 @@ func _move_through_platform():
 	if get_slide_collision_count() == 0:
 		return
 	
-	if get_slide_collision(0) != null and get_slide_collision(0).get_collider() is StaticBody2D:
+	if get_slide_collision(0).get_collider() is StaticBody2D:
 		first_recent_colision = get_slide_collision(0).get_collider()
 	
 	if Input.is_action_pressed("move_down") and is_on_floor():

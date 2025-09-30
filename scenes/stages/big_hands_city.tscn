@@ -1,4 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bc87oi50iuyew"]
+[gd_scene load_steps=7 format=3 uid="uid://bc87oi50iuyew"]
+
+[ext_resource type="PackedScene" uid="uid://drhh06g3j337p" path="res://scenes/ui/hud.tscn" id="1_ehygr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lqbhf"]
 size = Vector2(1536, 880)
@@ -76,3 +78,15 @@ texture = SubResource("PlaceholderTexture2D_ki0ho")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Platform3"]
 shape = SubResource("RectangleShape2D_5md5d")
 one_way_collision = true
+
+[node name="HUD" parent="." instance=ExtResource("1_ehygr")]
+offset_left = -560.0
+offset_top = -312.0
+offset_right = -560.0
+offset_bottom = -312.0
+
+[node name="HUD2" parent="." instance=ExtResource("1_ehygr")]
+offset_left = 520.0
+offset_top = -312.0
+offset_right = 520.0
+offset_bottom = -312.0
