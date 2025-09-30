@@ -8,7 +8,7 @@ size = Vector2(1536, 880)
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_k366a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ugxj"]
-size = Vector2(1024, 160)
+size = Vector2(1024, 96)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_78yxw"]
 
@@ -20,9 +20,9 @@ size = Vector2(288, 26)
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="PlayArea" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea"]
-visible = false
 shape = SubResource("RectangleShape2D_78yxw")
 
 [node name="Stage" type="Node" parent="."]
@@ -37,7 +37,6 @@ scale = Vector2(1024, 96)
 texture = SubResource("PlaceholderTexture2D_k366a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Floor"]
-position = Vector2(0, 32)
 shape = SubResource("RectangleShape2D_2ugxj")
 
 [node name="Platform" type="StaticBody2D" parent="Stage"]
@@ -79,14 +78,14 @@ texture = SubResource("PlaceholderTexture2D_78yxw")
 shape = SubResource("RectangleShape2D_psigm")
 one_way_collision = true
 
-[node name="HUD" parent="." instance=ExtResource("1_m4npe")]
-offset_left = -560.0
+[node name="ServerHUD" parent="." instance=ExtResource("1_m4npe")]
+offset_left = -568.0
 offset_top = -312.0
-offset_right = -560.0
-offset_bottom = -312.0
+offset_right = -448.0
+offset_bottom = -237.0
 
-[node name="HUD2" parent="." instance=ExtResource("1_m4npe")]
-offset_left = 464.0
-offset_top = -304.0
-offset_right = 564.0
-offset_bottom = -254.0
+[node name="ClientHUD" parent="." instance=ExtResource("1_m4npe")]
+offset_left = 448.0
+offset_top = -312.0
+offset_right = 568.0
+offset_bottom = -237.0

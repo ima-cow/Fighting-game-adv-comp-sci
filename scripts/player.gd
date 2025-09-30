@@ -15,14 +15,16 @@ func _enter_tree() -> void:
 	$MoveSpawner.set_multiplayer_authority(player_id)
 
 func _ready() -> void:
+	if player_id != multiplayer.get_unique_id():
+		set_physics_process(false)
+	
 	if player_id == SERVER:
-		position.x = SPAWN_DISPLACEMENT
+		position.x = -SPAWN_DISPLACEMENT
 	else:
 		position.x = -SPAWN_DISPLACEMENT
 
 func _physics_process(delta: float) -> void:
-	if player_id == multiplayer.get_unique_id():
-		_do_player_actions(delta)
+	_do_player_actions(delta)
 
 var can_move := true
 var jump_holding_amount := 0.0
@@ -75,7 +77,7 @@ func _move_through_platform():
 			second_recent_colision = first_recent_colision
 
 func _process(_delta: float) -> void:
-	if health <= 0:
+	if health <= 0 and multiplayer.is_server():
 		print("YOU DIED!")
 		queue_free()
 	

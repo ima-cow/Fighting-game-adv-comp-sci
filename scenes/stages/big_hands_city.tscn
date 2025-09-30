@@ -20,9 +20,9 @@ size = Vector2(256, 26)
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="PlayArea" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea"]
-visible = false
 shape = SubResource("RectangleShape2D_lqbhf")
 
 [node name="Stage" type="Node" parent="."]
@@ -79,14 +79,14 @@ texture = SubResource("PlaceholderTexture2D_ki0ho")
 shape = SubResource("RectangleShape2D_5md5d")
 one_way_collision = true
 
-[node name="HUD" parent="." instance=ExtResource("1_ehygr")]
-offset_left = -560.0
+[node name="ServerHUD" parent="." instance=ExtResource("1_ehygr")]
+offset_left = -568.0
 offset_top = -312.0
-offset_right = -560.0
-offset_bottom = -312.0
+offset_right = -448.0
+offset_bottom = -237.0
 
-[node name="HUD2" parent="." instance=ExtResource("1_ehygr")]
-offset_left = 464.0
+[node name="ClientHUD" parent="." instance=ExtResource("1_ehygr")]
+offset_left = 448.0
 offset_top = -304.0
-offset_right = 564.0
-offset_bottom = -254.0
+offset_right = 568.0
+offset_bottom = -229.0
