@@ -37,20 +37,15 @@ func _ready() -> void:
 	name_field = $ServerConnector.get_node("%NameField")
 	host_game.pressed.connect(_on_host_game_pressed)
 	join_game.pressed.connect(_on_join_game_pressed)
-	ip_address_field.text_submitted.connect(_on_ip_adress_field_text_submitted)
 	name_field.text_submitted.connect(_on_name_field_text_submitted)
-
-func _on_ip_adress_field_text_submitted(new_text: String):
-	if name_field.has_ime_text() and new_text != "":
-		join_game.disabled = false
-	else:
-		join_game.disabled = true
 
 func _on_name_field_text_submitted(new_text: String):
 	if new_text != "":
 		host_game.disabled = false
+		join_game.disabled = false
 	else:
 		host_game.disabled = true
+		join_game.disabled = true
 
 func _on_host_game_pressed():
 	$ServerConnector.queue_free()
@@ -102,7 +97,7 @@ func sync_stages():
 		attempt_to_instantiate_stage.rpc_id(multiplayer.get_peers()[0])
 	else:
 		await multiplayer.peer_connected
-		attempt_to_instantiate_stage.rpc_id(multiplayer.selected_stageget_peers()[0])
+		attempt_to_instantiate_stage.rpc_id(multiplayer.get_peers()[0])
 
 # called with context that the other peer is ready for the stage
 @rpc("any_peer", "call_local")

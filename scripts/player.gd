@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-const JUMP_VELOCITY := -500.0
-const JUMP_MAX := 0.03
+const JUMP_VELOCITY := -100.0
+const JUMP_MAX := 0.02
 @export var speed := 400.0
 @export var health := 100.0
 const SPAWN_DISPLACEMENT := 300
