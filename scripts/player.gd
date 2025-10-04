@@ -2,9 +2,10 @@ extends CharacterBody2D
 
 const JUMP_VELOCITY := -100.0
 const JUMP_MAX := 0.02
-@export var speed := 400.0
-@export var health := 100.0
+const SPEED := 400.0
 const SPAWN_DISPLACEMENT := 300
+@export var health := 100.0
+@export var stocks := 3
 
 const SERVER := 1
 @export var player_id := -1
@@ -21,7 +22,7 @@ func _ready() -> void:
 	if player_id == SERVER:
 		position.x = -SPAWN_DISPLACEMENT
 	else:
-		position.x = -SPAWN_DISPLACEMENT
+		position.x = SPAWN_DISPLACEMENT
 
 func _physics_process(delta: float) -> void:
 	_do_player_actions(delta)
@@ -46,9 +47,9 @@ func _do_player_actions(delta: float):
 		
 		var direction := Input.get_axis("move_left", "move_right")
 		if direction:
-			velocity.x = direction * speed
+			velocity.x = direction * SPEED
 		else:
-			velocity.x = move_toward(velocity.x, 0, speed)
+			velocity.x = move_toward(velocity.x, 0, SPEED)
 		
 		_move_through_platform()
 		$MoveResolver.do_move(global_position)
@@ -77,10 +78,6 @@ func _move_through_platform():
 			second_recent_colision = first_recent_colision
 
 func _process(_delta: float) -> void:
-	if health <= 0 and multiplayer.is_server():
-		print("YOU DIED!")
-		queue_free()
-	
 	if velocity.x < 0:
 		$Sprite2D.flip_h = true
 	elif velocity.x > 0:

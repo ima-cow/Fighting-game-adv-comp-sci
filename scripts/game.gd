@@ -37,9 +37,13 @@ func _ready() -> void:
 	join_game = $ServerConnector.get_node("%JoinGame")
 	ip_address_field = $ServerConnector.get_node("%IPAddressField")
 	name_field = $ServerConnector.get_node("%NameField")
+	
 	host_game.pressed.connect(_on_host_game_pressed)
 	join_game.pressed.connect(_on_join_game_pressed)
 	name_field.text_submitted.connect(_on_name_field_text_submitted)
+	
+	$PlayerResolver.player_died.connect()
+	$PlayerResolver.player_hit.connect()
 
 func _on_name_field_text_submitted(new_text: String):
 	if new_text != "":
@@ -69,7 +73,7 @@ func _on_join_game_pressed():
 
 @rpc("any_peer", "call_local")
 func add_name(name_to_add: String):
-	player_names[multiplayer.get_unique_id()] = name_to_add
+	player_names[multiplayer.get_remote_sender_id()] = name_to_add
 
 func select_stage():
 	add_child(stage_selector.instantiate())
