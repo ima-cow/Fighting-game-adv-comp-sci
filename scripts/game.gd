@@ -42,8 +42,8 @@ func _ready() -> void:
 	join_game.pressed.connect(_on_join_game_pressed)
 	name_field.text_submitted.connect(_on_name_field_text_submitted)
 	
-	$PlayerResolver.player_died.connect()
-	$PlayerResolver.player_hit.connect()
+	$PlayerResolver.player_died.connect(_on_player_died)
+	$PlayerResolver.player_hit.connect(_on_player_hit)
 
 func _on_name_field_text_submitted(new_text: String):
 	if new_text != "":
@@ -123,3 +123,21 @@ func instantiate_player():
 	player_to_instantiate.name = str(multiplayer.get_remote_sender_id())
 	$PlayerResolver.add_child(player_to_instantiate, true)
 	player_insantiated.emit()
+
+func _on_player_hit(damage: float, player_id: int):
+	var server_hud := get_child(2).get_node("ServerHUD")
+	var client_hud := get_child(2).get_node("ClientHUD")
+	if player_id == SERVER:
+		server_hud.get_node("%HealthBar").value -= damage
+	else:
+		client_hud.get_node("%HealthBar").value -= damage
+
+func _on_player_died(player_id: int):
+	var server_hud := get_child(2).get_node("ServerHUD")
+	var client_hud := get_child(2).get_node("ClientHUD")
+	if player_id == SERVER:
+		server_hud.get_node("%StocksBar").value -= 1
+		server_hud.get_node("%HealthBar").value = 100.0
+	else:
+		client_hud.get_node("%StocksBar").value -= 1
+		client_hud.get_node("%HealthBar").value = 100.0
