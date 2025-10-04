@@ -1,6 +1,6 @@
 class_name MoveResolver extends Node
 
-signal move_instantiated(player_hit_id: int, damage, float)
+signal move_instantiated(player_hit_id: int, damage: float, knockback: Vector2)
 
 @export var jab := preload("res://scenes/moves/blank_move.tscn")
 @export var smash := preload("res://scenes/moves/blank_move.tscn")
@@ -33,4 +33,4 @@ func _on_move_spawner_spawned(node: Node2D):
 
 func _on_move_body_shape_entered(_body_rid: RID, body: Node2D, _body_shape_index: int, _local_shape_index: int):
 	if body != $"..":
-		move_instantiated.emit(body.player_id, get_child(0).damage)
+		move_instantiated.emit(body.player_id, get_child(0).damage, get_child(0).knockback)

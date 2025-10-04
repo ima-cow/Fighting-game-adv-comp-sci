@@ -4,6 +4,7 @@ extends Area2D
 @export var up_time := 0.1
 @export var end_lag := 0.1
 @export var damage := 10.0
+@export var knockback := Vector2(400, -400)
 
 @onready var character := $"../.."
 
