@@ -5,12 +5,28 @@ const JUMP_MULTIPLIER := 2
 @export var speed := 400.0
 @export var health := 100.0
 var can_move := true
+const SPAWN_DISPLACEMENT := 300
 
-#func _ready() -> void:
-	#$"../PlayArea".body_shape_exited.connect(_on_play_area_body_shaped_exited)
+const SERVER := 1
+
+@export var player_id := -1
+
+func _enter_tree() -> void:
+	$PlayerSynchronizer.set_multiplayer_authority(int(name))
+	player_id = int(name)
+
+func _ready() -> void:
+	if player_id == SERVER:
+		position.x = SPAWN_DISPLACEMENT
+	else:
+		position.x = -SPAWN_DISPLACEMENT
 
 var jump_holding_amount := 1.0
 func _physics_process(delta: float) -> void:
+	if player_id == multiplayer.get_unique_id():
+		_do_player_actions(delta)
+
+func _do_player_actions(delta: float):
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
@@ -28,7 +44,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, speed)
 		
-		move_through_platform()
+		_move_through_platform()
 		$MoveResolver.do_move(global_position)
 	else:
 		velocity.x *= 0.8
@@ -37,11 +53,11 @@ func _physics_process(delta: float) -> void:
 
 var first_recent_colision: StaticBody2D 
 var second_recent_colision: StaticBody2D
-func move_through_platform():
+func _move_through_platform():
 	if get_slide_collision_count() == 0:
 		return
 	
-	if get_slide_collision(0) != null:
+	if get_slide_collision(0) != null and get_slide_collision(0).get_collider() is StaticBody2D:
 		first_recent_colision = get_slide_collision(0).get_collider()
 	
 	if Input.is_action_pressed("move_down") and is_on_floor():

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ci00djhpub8kb"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_phu2e"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="PlayerSynchronizer" type="MultiplayerSynchronizer"]
+replication_config = SubResource("SceneReplicationConfig_phu2e")

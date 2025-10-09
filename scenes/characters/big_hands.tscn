@@ -1,17 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://dtjm3krq2hla"]
+[gd_scene load_steps=6 format=3 uid="uid://dtjm3krq2hla"]
 
 [ext_resource type="Script" uid="uid://dmmkpendim0ea" path="res://scripts/player.gd" id="1_qudrh"]
 [ext_resource type="Script" uid="uid://debrlwtgoufjc" path="res://scripts/move_resolver.gd" id="2_8b2gc"]
 [ext_resource type="Texture2D" uid="uid://dnf1qy7ka7e45" path="res://assets/FG_BHG.png" id="2_mc4gd"]
+[ext_resource type="PackedScene" uid="uid://ci00djhpub8kb" path="res://scenes/player_synchronizer.tscn" id="4_mc4gd"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k366a"]
 radius = 16.0
 height = 64.0
 
-[node name="Ninja" type="CharacterBody2D"]
+[node name="BigHands" type="CharacterBody2D"]
 script = ExtResource("1_qudrh")
 metadata/SPEED = 0
 metadata/JUMP_SPEED = 0
+
+[node name="PlayerSynchronizer" parent="." instance=ExtResource("4_mc4gd")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_k366a")
