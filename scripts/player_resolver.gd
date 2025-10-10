@@ -28,7 +28,7 @@ func hit_player(player_hit_id: int, damage: float, knockback: Vector2):
 		else:
 			player_attacker = player
 	damage_player(player_hit_char, damage)
-	if multiplayer.get_unique_id() == multiplayer.get_remote_sender_id():
+	if multiplayer.get_unique_id() != multiplayer.get_remote_sender_id():
 		print(multiplayer.get_unique_id())
 		knockback_player(player_hit_char, player_attacker, knockback)
 
