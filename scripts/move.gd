@@ -3,6 +3,9 @@ extends Area2D
 @export var start_up := 0.1
 @export var up_time := 0.1
 @export var end_lag := 0.1
+@export var damage := 10.0
+@export var knockback := Vector2(400, -400)
+
 @onready var character := $"../.."
 
 func _ready() -> void:
@@ -18,10 +21,10 @@ func _ready() -> void:
 	queue_free()
 
 func _physics_process(_delta: float) -> void:
-	global_position = get_parent().get_parent().global_position
+	global_position = character.global_position
 
 func _process(_delta: float) -> void:
-	if character.get_child(1).flip_h:
+	if $"../../Sprite2D".flip_h:
 		rotation_degrees = 180
 		$Sprite2D.flip_v = true
 	else:

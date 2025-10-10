@@ -1,48 +1,55 @@
 extends CharacterBody2D
 
-const JUMP_VELOCITY := -550.0
-const JUMP_MULTIPLIER := 2
-@export var speed := 400.0
-@export var health := 100.0
-var can_move := true
+const JUMP_VELOCITY := -100.0
+const JUMP_MAX := 0.02
+const SPEED := 400.0
 const SPAWN_DISPLACEMENT := 300
+@export var health := 100.0
+@export var stocks := 3
 
 const SERVER := 1
-
 @export var player_id := -1
 
 func _enter_tree() -> void:
-	$PlayerSynchronizer.set_multiplayer_authority(int(name))
 	player_id = int(name)
+	$PlayerSynchronizer.set_multiplayer_authority(player_id)
+	$MoveSpawner.set_multiplayer_authority(player_id)
 
 func _ready() -> void:
+	if player_id != multiplayer.get_unique_id():
+		set_physics_process(false)
+	
 	if player_id == SERVER:
-		position.x = SPAWN_DISPLACEMENT
-	else:
 		position.x = -SPAWN_DISPLACEMENT
+	else:
+		position.x = SPAWN_DISPLACEMENT
 
-var jump_holding_amount := 1.0
 func _physics_process(delta: float) -> void:
-	if player_id == multiplayer.get_unique_id():
-		_do_player_actions(delta)
+	_do_player_actions(delta)
 
+var can_move := true
+var jump_holding_amount := 0.0
+var can_jump := true
 func _do_player_actions(delta: float):
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+	else:
+		can_jump = true
 	
 	if can_move:
-		if Input.is_action_pressed("jump"):
-			if jump_holding_amount < 2:
-				jump_holding_amount += JUMP_MULTIPLIER * delta
-		elif Input.is_action_just_released("jump") and is_on_floor():
-			velocity.y = JUMP_VELOCITY * jump_holding_amount
-			jump_holding_amount = 1
+		if Input.is_action_pressed("jump") and can_jump:
+			if jump_holding_amount < JUMP_MAX:
+				velocity.y += JUMP_VELOCITY
+				jump_holding_amount += delta * 0.1
+		else:
+			jump_holding_amount = 0.0
+			can_jump = false
 		
 		var direction := Input.get_axis("move_left", "move_right")
 		if direction:
-			velocity.x = direction * speed
+			velocity.x = direction * SPEED
 		else:
-			velocity.x = move_toward(velocity.x, 0, speed)
+			velocity.x = move_toward(velocity.x, 0, SPEED)
 		
 		_move_through_platform()
 		$MoveResolver.do_move(global_position)
@@ -57,7 +64,7 @@ func _move_through_platform():
 	if get_slide_collision_count() == 0:
 		return
 	
-	if get_slide_collision(0) != null and get_slide_collision(0).get_collider() is StaticBody2D:
+	if get_slide_collision(0).get_collider() is StaticBody2D:
 		first_recent_colision = get_slide_collision(0).get_collider()
 	
 	if Input.is_action_pressed("move_down") and is_on_floor():
@@ -71,10 +78,6 @@ func _move_through_platform():
 			second_recent_colision = first_recent_colision
 
 func _process(_delta: float) -> void:
-	if health <= 0:
-		print("YOU DIED!")
-		queue_free()
-	
 	if velocity.x < 0:
 		$Sprite2D.flip_h = true
 	elif velocity.x > 0:

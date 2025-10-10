@@ -37,28 +37,13 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="NinjaGardensButton" type="TextureButton" parent="CenterContainer/HBoxContainer/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 texture_normal = ExtResource("2_disgg")
 
 [node name="Label" type="Label" parent="CenterContainer/HBoxContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "Ninja Gadens"
-horizontal_alignment = 1
-
-[node name="CenterContainer2" type="CenterContainer" parent="CenterContainer/HBoxContainer"]
-custom_minimum_size = Vector2(200, 200)
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/HBoxContainer/CenterContainer2"]
-layout_mode = 2
-
-[node name="CowboyDesertButton" type="TextureButton" parent="CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer"]
-layout_mode = 2
-texture_normal = ExtResource("2_disgg")
-
-[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer"]
-layout_mode = 2
-text = "Cowboy Dessert"
 horizontal_alignment = 1
 
 [node name="CenterContainer3" type="CenterContainer" parent="CenterContainer/HBoxContainer"]
@@ -69,6 +54,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="BigHandsCityButton" type="TextureButton" parent="CenterContainer/HBoxContainer/CenterContainer3/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 texture_normal = ExtResource("2_disgg")
 
@@ -76,7 +62,3 @@ texture_normal = ExtResource("2_disgg")
 layout_mode = 2
 text = "Big Hands City"
 horizontal_alignment = 1
-
-[connection signal="button_up" from="CenterContainer/HBoxContainer/CenterContainer/VBoxContainer/NinjaGardensButton" to="." method="_on_ninja_gardens_button_button_up"]
-[connection signal="button_up" from="CenterContainer/HBoxContainer/CenterContainer2/VBoxContainer/CowboyDesertButton" to="." method="_on_cowboy_desert_button_button_up"]
-[connection signal="button_up" from="CenterContainer/HBoxContainer/CenterContainer3/VBoxContainer/BigHandsCityButton" to="." method="_on_big_hands_city_button_button_up"]
