@@ -20,10 +20,16 @@ func _on_player_move_instantiated(player_hit_id: int, damage: float, knockback: 
 
 @rpc("any_peer", "call_local")
 func hit_player(player_hit_id: int, damage: float, knockback: Vector2):
+	var player_hit_char: CharacterBody2D
+	var player_attacker: CharacterBody2D
 	for player:CharacterBody2D in get_children():
 		if player.player_id == player_hit_id:
-			damage_player(player, damage)
-			knockback_player(player, knockback)
+			player_hit_char = player
+		else:
+			player_attacker = player
+	damage_player(player_hit_char, damage)
+	if multiplayer.get_unique_id() == multiplayer.get_remote_sender_id():
+		knockback_player(player_hit_char, player_attacker, knockback)
 
 func damage_player(player:CharacterBody2D, damage: float):
 	player.health -= damage
@@ -43,9 +49,11 @@ func damage_player(player:CharacterBody2D, damage: float):
 	else:
 		player_hit.emit(damage, player.player_id)
 
-func knockback_player(player:CharacterBody2D, knockback: Vector2):
-	if !player.get_node("Sprite2D").flip_h:
-		player.velocity += knockback
+func knockback_player(player_hit_char:CharacterBody2D, player_attacker: CharacterBody2D, knockback: Vector2):
+	print("player_hit_char ",player_hit_char)
+	print("player_attacker ", player_attacker)
+	if !player_attacker.get_node("Sprite2D").flip_h:
+		player_hit_char.velocity += knockback
 	else:
-		player.velocity += Vector2(-knockback.x,knockback.y)
-	player.move_and_slide()
+		player_hit_char.velocity += Vector2(-knockback.x,knockback.y)
+	player_hit_char.move_and_slide()
