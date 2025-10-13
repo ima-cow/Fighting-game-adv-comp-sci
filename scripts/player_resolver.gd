@@ -28,7 +28,8 @@ func hit_player(player_hit_id: int, damage: float, knockback: Vector2):
 		else:
 			player_attacker = player
 	damage_player(player_hit_char, damage)
-	if multiplayer.get_unique_id() == multiplayer.get_remote_sender_id():
+	if multiplayer.get_unique_id() != multiplayer.get_remote_sender_id():
+		print(multiplayer.get_unique_id())
 		knockback_player(player_hit_char, player_attacker, knockback)
 
 func damage_player(player:CharacterBody2D, damage: float):
@@ -50,10 +51,11 @@ func damage_player(player:CharacterBody2D, damage: float):
 		player_hit.emit(damage, player.player_id)
 
 func knockback_player(player_hit_char:CharacterBody2D, player_attacker: CharacterBody2D, knockback: Vector2):
-	print("player_hit_char ",player_hit_char)
-	print("player_attacker ", player_attacker)
-	if !player_attacker.get_node("Sprite2D").flip_h:
-		player_hit_char.velocity += knockback
+	print(player_attacker.fliped)
+	print(knockback)
+	if player_attacker.fliped:
+		player_hit_char.velocity = knockback
+		print("1 ",player_hit_char.velocity)
 	else:
-		player_hit_char.velocity += Vector2(-knockback.x,knockback.y)
-	player_hit_char.move_and_slide()
+		player_hit_char.velocity = Vector2(-knockback.x,knockback.y)
+		print("2 ",player_hit_char.velocity)

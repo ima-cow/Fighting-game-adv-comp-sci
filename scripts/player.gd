@@ -6,6 +6,7 @@ const SPEED := 400.0
 const SPAWN_DISPLACEMENT := 300
 @export var health := 100.0
 @export var stocks := 3
+@export var fliped := false;
 
 const SERVER := 1
 @export var player_id := -1
@@ -17,7 +18,7 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	if player_id != multiplayer.get_unique_id():
-		set_physics_process(false)
+		set_process(false)
 	
 	if player_id == SERVER:
 		position.x = -SPAWN_DISPLACEMENT
@@ -25,7 +26,9 @@ func _ready() -> void:
 		position.x = SPAWN_DISPLACEMENT
 
 func _physics_process(delta: float) -> void:
-	_do_player_actions(delta)
+	if player_id == multiplayer.get_unique_id():
+		_do_player_actions(delta)
+	move_and_slide()
 
 var can_move := true
 var jump_holding_amount := 0.0
@@ -55,8 +58,6 @@ func _do_player_actions(delta: float):
 		$MoveResolver.do_move(global_position)
 	else:
 		velocity.x *= 0.8
-	
-	move_and_slide()
 
 var first_recent_colision: StaticBody2D 
 var second_recent_colision: StaticBody2D
@@ -78,10 +79,12 @@ func _move_through_platform():
 			second_recent_colision = first_recent_colision
 
 func _process(_delta: float) -> void:
-	if velocity.x < 0:
-		$Sprite2D.flip_h = true
-	elif velocity.x > 0:
+	if Input.get_action_strength("move_right") > 0:
 		$Sprite2D.flip_h = false
+		fliped = false
+	elif Input.get_action_strength("move_left") > 0:
+		$Sprite2D.flip_h = true
+		fliped = true
 
 func _on_play_area_body_shaped_exited():
 	health = 0
