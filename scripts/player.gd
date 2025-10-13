@@ -79,12 +79,12 @@ func _move_through_platform():
 			second_recent_colision = first_recent_colision
 
 func _process(_delta: float) -> void:
-	if velocity.x < 0:
-		$Sprite2D.flip_h = true
-		fliped = true
-	elif velocity.x > 0:
+	if Input.get_action_strength("move_right") > 0:
 		$Sprite2D.flip_h = false
 		fliped = false
+	elif Input.get_action_strength("move_left") > 0:
+		$Sprite2D.flip_h = true
+		fliped = true
 
 func _on_play_area_body_shaped_exited():
 	health = 0
