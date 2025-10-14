@@ -12,10 +12,10 @@ func _ready() -> void:
 	character.can_move = false
 	await get_tree().create_timer(start_up).timeout
 	monitoring = true
-	$Sprite2D.visible = true
+	$AnimatedSprite2d.visible = true
 	await get_tree().create_timer(up_time).timeout
 	monitoring = false
-	$Sprite2D.visible = false
+	$AnimatedSprite2d.visible = false
 	await get_tree().create_timer(end_lag).timeout
 	character.can_move = true
 	queue_free()
@@ -24,9 +24,9 @@ func _physics_process(_delta: float) -> void:
 	global_position = character.global_position
 
 func _process(_delta: float) -> void:
-	if $"../../Sprite2D".flip_h:
+	if $"../../AnimatedSprite2d".flip_h:
 		rotation_degrees = 180
-		$Sprite2D.flip_v = true
+		$AnimatedSprite2d.flip_v = true
 	else:
 		rotation_degrees = 0
-		$Sprite2D.flip_v = false
+		$AnimatedSprite2d.flip_v = false

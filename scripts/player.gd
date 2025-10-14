@@ -10,6 +10,7 @@ const SPAWN_DISPLACEMENT := 300
 
 const SERVER := 1
 @export var player_id := -1
+@onready var animated_sprite = $AnimatedSprite2D
 
 func _enter_tree() -> void:
 	player_id = int(name)
@@ -34,6 +35,22 @@ var can_move := true
 var jump_holding_amount := 0.0
 var can_jump := true
 func _do_player_actions(delta: float):
+	
+	#Run_Animation
+	if (velocity.x != 0 && velocity.y == 0):
+		animated_sprite.play("Run")
+	
+	#Idle_Animation
+	if (velocity.x == 0 && velocity.y == 0):
+		animated_sprite.play("Idle")
+	
+	#Jump_Animations
+	if (velocity.y != 0):
+		if (velocity.y > 0):
+			animated_sprite.play("Jump")
+		if (velocity.y < 0):
+			animated_sprite.play("Apex")
+	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	else:
@@ -80,10 +97,10 @@ func _move_through_platform():
 
 func _process(_delta: float) -> void:
 	if Input.get_action_strength("move_right") > 0:
-		$Sprite2D.flip_h = false
+		$AnimatedSprite2D.flip_h = false
 		fliped = false
 	elif Input.get_action_strength("move_left") > 0:
-		$Sprite2D.flip_h = true
+		$AnimatedSprite2D.flip_h = true
 		fliped = true
 
 func _on_play_area_body_shaped_exited():
