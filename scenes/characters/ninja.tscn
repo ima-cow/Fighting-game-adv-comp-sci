@@ -4,11 +4,27 @@
 [ext_resource type="Script" uid="uid://debrlwtgoufjc" path="res://scripts/move_resolver.gd" id="2_4i837"]
 [ext_resource type="Texture2D" uid="uid://bpwdqq1ouhs0v" path="res://assets/FG_Ninja.png" id="2_phu2e"]
 [ext_resource type="PackedScene" uid="uid://fe6g3ehg3x8c" path="res://scenes/multiplayer/move_spawner.tscn" id="3_8d3cj"]
-[ext_resource type="PackedScene" uid="uid://ci00djhpub8kb" path="res://scenes/multiplayer/player_synchronizer.tscn" id="4_wv722"]
 [ext_resource type="Texture2D" uid="uid://b7o7jky5xpb13" path="res://assets/FG_Ninja_Apec.png" id="5_5hpkg"]
 [ext_resource type="Texture2D" uid="uid://bhe1s84gk7tca" path="res://assets/FG_Ninja_Fall.png" id="6_jbigb"]
 [ext_resource type="Texture2D" uid="uid://ba3sh7ek6y8n1" path="res://assets/FG_Ninja_Run.png" id="6_ynscx"]
 [ext_resource type="Texture2D" uid="uid://b5nedkdboiafq" path="res://assets/FG_Ninja_Jump.png" id="8_uiabq"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_qi5yo"]
+properties/0/path = NodePath(".:fliped")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("AnimatedSprite2D:frame")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("AnimatedSprite2D:flip_h")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("AnimatedSprite2D:animation")
+properties/4/spawn = true
+properties/4/replication_mode = 1
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k366a"]
 radius = 13.0
@@ -155,7 +171,8 @@ script = ExtResource("1_got4c")
 metadata/SPEED = 0
 metadata/JUMP_SPEED = 0
 
-[node name="PlayerSynchronizer" parent="." instance=ExtResource("4_wv722")]
+[node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_qi5yo")
 
 [node name="MoveSpawner" parent="." instance=ExtResource("3_8d3cj")]
 

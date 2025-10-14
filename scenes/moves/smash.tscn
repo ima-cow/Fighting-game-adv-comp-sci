@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://butrx0jb70ikf"]
+
+[ext_resource type="Script" uid="uid://w3ns0hrsygf7" path="res://scripts/move.gd" id="1_4hru3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ye8p"]
+size = Vector2(48, 32)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_btnd1"]
+
+[node name="Smash" type="Area2D"]
+monitoring = false
+monitorable = false
+script = ExtResource("1_4hru3")
+knockback = Vector2(-4000, -400)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(32, 0)
+shape = SubResource("RectangleShape2D_5ye8p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(32, 9.53674e-07)
+scale = Vector2(48, 32.5)
+texture = SubResource("PlaceholderTexture2D_btnd1")

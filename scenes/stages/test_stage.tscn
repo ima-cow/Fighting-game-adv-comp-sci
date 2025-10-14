@@ -1,0 +1,97 @@
+[gd_scene load_steps=8 format=3 uid="uid://d320j6rp1fmd7"]
+
+[ext_resource type="PackedScene" uid="uid://drhh06g3j337p" path="res://scenes/ui/hud.tscn" id="1_78alf"]
+[ext_resource type="PackedScene" uid="uid://dmslc11hhyyu" path="res://scenes/characters/ninja.tscn" id="2_u63yl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_78yxw"]
+size = Vector2(1536, 880)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_k366a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ugxj"]
+size = Vector2(1024, 96)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_78yxw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_psigm"]
+size = Vector2(288, 26)
+
+[node name="TestStage" type="Node"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PlayArea" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea"]
+shape = SubResource("RectangleShape2D_78yxw")
+
+[node name="Stage" type="Node" parent="."]
+
+[node name="Floor" type="StaticBody2D" parent="Stage"]
+position = Vector2(0, 256)
+metadata/is_platform = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Stage/Floor"]
+position = Vector2(9.53674e-06, -7.62939e-06)
+scale = Vector2(1024, 96)
+texture = SubResource("PlaceholderTexture2D_k366a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Floor"]
+shape = SubResource("RectangleShape2D_2ugxj")
+
+[node name="Platform" type="StaticBody2D" parent="Stage"]
+position = Vector2(256, 64)
+metadata/is_platform = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Stage/Platform"]
+position = Vector2(7.62939e-06, -4.76837e-07)
+scale = Vector2(288, 32)
+texture = SubResource("PlaceholderTexture2D_78yxw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Platform"]
+shape = SubResource("RectangleShape2D_psigm")
+one_way_collision = true
+
+[node name="Platform2" type="StaticBody2D" parent="Stage"]
+position = Vector2(-256, 64)
+metadata/is_platform = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Stage/Platform2"]
+position = Vector2(7.62939e-06, -4.76837e-07)
+scale = Vector2(288, 32)
+texture = SubResource("PlaceholderTexture2D_78yxw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Platform2"]
+shape = SubResource("RectangleShape2D_psigm")
+one_way_collision = true
+
+[node name="Platform3" type="StaticBody2D" parent="Stage"]
+position = Vector2(0, -80)
+metadata/is_platform = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Stage/Platform3"]
+position = Vector2(7.62939e-06, -4.76837e-07)
+scale = Vector2(288, 32)
+texture = SubResource("PlaceholderTexture2D_78yxw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Platform3"]
+shape = SubResource("RectangleShape2D_psigm")
+one_way_collision = true
+
+[node name="ServerHUD" parent="." instance=ExtResource("1_78alf")]
+offset_left = -568.0
+offset_top = -312.0
+offset_right = -448.0
+offset_bottom = -237.0
+metadata/_edit_use_anchors_ = true
+
+[node name="ClientHUD" parent="." instance=ExtResource("1_78alf")]
+offset_left = 448.0
+offset_top = -312.0
+offset_right = 568.0
+offset_bottom = -237.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Ninja" parent="." instance=ExtResource("2_u63yl")]
+position = Vector2(-344, -136)

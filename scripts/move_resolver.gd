@@ -3,7 +3,7 @@ class_name MoveResolver extends Node
 signal move_instantiated(player_hit_id: int, damage: float, knockback: Vector2)
 
 @export var jab := preload("res://scenes/moves/blank_move.tscn")
-@export var smash := preload("res://scenes/moves/blank_move.tscn")
+@export var smash := preload("res://scenes/moves/smash.tscn")
 @export var special_1 := preload("res://scenes/moves/blank_move.tscn")
 
 var player_position: Vector2

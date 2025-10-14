@@ -30,12 +30,9 @@ func _physics_process(delta: float) -> void:
 	if player_id == multiplayer.get_unique_id():
 		_do_player_actions(delta)
 	move_and_slide()
+	_do_player_animations(delta)
 
-var can_move := true
-var jump_holding_amount := 0.0
-var can_jump := true
-func _do_player_actions(delta: float):
-	
+func _do_player_animations(_delta: float):
 	#Run_Animation
 	if (velocity.x != 0 && velocity.y == 0):
 		animated_sprite.play("Run")
@@ -50,7 +47,11 @@ func _do_player_actions(delta: float):
 			animated_sprite.play("Jump")
 		if (velocity.y < 0):
 			animated_sprite.play("Apex")
-	
+
+var can_move := true
+var jump_holding_amount := 0.0
+var can_jump := true
+func _do_player_actions(delta: float):
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	else:
@@ -95,7 +96,7 @@ func _move_through_platform():
 			second_recent_colision.get_child(1).disabled = false
 			second_recent_colision = first_recent_colision
 
-func _process(_delta: float) -> void:
+func _process(_delta: float) -> void:	
 	if Input.get_action_strength("move_right") > 0:
 		$AnimatedSprite2D.flip_h = false
 		fliped = false
