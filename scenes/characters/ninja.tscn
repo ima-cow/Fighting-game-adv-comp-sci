@@ -1,13 +1,15 @@
-[gd_scene load_steps=27 format=3 uid="uid://dmslc11hhyyu"]
+[gd_scene load_steps=39 format=3 uid="uid://dmslc11hhyyu"]
 
 [ext_resource type="Script" uid="uid://dmmkpendim0ea" path="res://scripts/player.gd" id="1_got4c"]
 [ext_resource type="Script" uid="uid://debrlwtgoufjc" path="res://scripts/move_resolver.gd" id="2_4i837"]
-[ext_resource type="Texture2D" uid="uid://bpwdqq1ouhs0v" path="res://assets/FG_Ninja.png" id="2_phu2e"]
 [ext_resource type="PackedScene" uid="uid://fe6g3ehg3x8c" path="res://scenes/multiplayer/move_spawner.tscn" id="3_8d3cj"]
 [ext_resource type="Texture2D" uid="uid://b7o7jky5xpb13" path="res://assets/FG_Ninja_Apec.png" id="5_5hpkg"]
 [ext_resource type="Texture2D" uid="uid://bhe1s84gk7tca" path="res://assets/FG_Ninja_Fall.png" id="6_jbigb"]
+[ext_resource type="Texture2D" uid="uid://cgb8gko2o2qrv" path="res://assets/FG_Ninja_Idle.png" id="6_uiabq"]
 [ext_resource type="Texture2D" uid="uid://ba3sh7ek6y8n1" path="res://assets/FG_Ninja_Run.png" id="6_ynscx"]
+[ext_resource type="Texture2D" uid="uid://cgdm1e7jfkdmb" path="res://assets/FG_Ninja_Jab.png" id="7_jbigb"]
 [ext_resource type="Texture2D" uid="uid://b5nedkdboiafq" path="res://assets/FG_Ninja_Jump.png" id="8_uiabq"]
+[ext_resource type="Texture2D" uid="uid://b252ps0vm08w8" path="res://assets/FG_Ninja_Smash.png" id="10_uiabq"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_qi5yo"]
 properties/0/path = NodePath(".:fliped")
@@ -58,6 +60,22 @@ region = Rect2(64, 0, 32, 32)
 atlas = ExtResource("6_jbigb")
 region = Rect2(96, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_8m4ir"]
+atlas = ExtResource("6_uiabq")
+region = Rect2(0, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_movhe"]
+atlas = ExtResource("7_jbigb")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tc6ul"]
+atlas = ExtResource("7_jbigb")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8olko"]
+atlas = ExtResource("7_jbigb")
+region = Rect2(64, 0, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_385v0"]
 atlas = ExtResource("8_uiabq")
 region = Rect2(0, 0, 32, 32)
@@ -89,6 +107,30 @@ region = Rect2(64, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_jbigb"]
 atlas = ExtResource("6_ynscx")
 region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gvna4"]
+atlas = ExtResource("10_uiabq")
+region = Rect2(0, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2c4d8"]
+atlas = ExtResource("10_uiabq")
+region = Rect2(48, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hganu"]
+atlas = ExtResource("10_uiabq")
+region = Rect2(96, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hi34"]
+atlas = ExtResource("10_uiabq")
+region = Rect2(144, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kk838"]
+atlas = ExtResource("10_uiabq")
+region = Rect2(192, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0pwd"]
+atlas = ExtResource("10_uiabq")
+region = Rect2(240, 0, 48, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uiabq"]
 animations = [{
@@ -125,11 +167,25 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_phu2e")
+"texture": SubResource("AtlasTexture_8m4ir")
 }],
 "loop": true,
 "name": &"Idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_movhe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tc6ul")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8olko")
+}],
+"loop": true,
+"name": &"Jab",
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -164,6 +220,29 @@ animations = [{
 "loop": true,
 "name": &"Run",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gvna4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2c4d8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hganu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4hi34")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kk838")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e0pwd")
+}],
+"loop": true,
+"name": &"Smash",
+"speed": 8.0
 }]
 
 [node name="Ninja" type="CharacterBody2D"]
@@ -175,6 +254,7 @@ metadata/JUMP_SPEED = 0
 replication_config = SubResource("SceneReplicationConfig_qi5yo")
 
 [node name="MoveSpawner" parent="." instance=ExtResource("3_8d3cj")]
+_spawnable_scenes = PackedStringArray("res://scenes/moves/blank_move.tscn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)
@@ -184,9 +264,12 @@ shape = SubResource("CapsuleShape2D_k366a")
 script = ExtResource("2_4i837")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(2, -7)
-scale = Vector2(2.5625002, 2.5625002)
+position = Vector2(-38, -48)
+scale = Vector2(2.5625, 2.5625002)
 sprite_frames = SubResource("SpriteFrames_uiabq")
-animation = &"Fall"
+animation = &"Smash"
+frame = 5
+frame_progress = 0.9324379
+centered = false
 
 [connection signal="spawned" from="MoveSpawner" to="MoveResolver" method="_on_move_spawner_spawned"]

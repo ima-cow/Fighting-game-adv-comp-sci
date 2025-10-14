@@ -1,12 +1,13 @@
 class_name MoveResolver extends Node
 
+
 signal move_instantiated(player_hit_id: int, damage: float, knockback: Vector2)
 
-@export var jab := preload("res://scenes/moves/blank_move.tscn")
+@export var jab := preload("res://scenes/moves/jab.tscn")
 @export var smash := preload("res://scenes/moves/smash.tscn")
-@export var special_1 := preload("res://scenes/moves/blank_move.tscn")
 
 var player_position: Vector2
+@onready var animated_sprite = $AnimatedSprite2D
 
 func do_move(position: Vector2):
 	player_position = position
@@ -15,12 +16,12 @@ func do_move(position: Vector2):
 	if Input.is_action_just_pressed("jab"):
 		print("jab")
 		instantiate_move(jab)
+		animated_sprite.play("Jab")
+		
 	elif Input.is_action_just_pressed("smash"):
 		print("smash")
 		instantiate_move(smash)
-	elif Input.is_action_just_pressed("special_1"):
-		print("special 1")
-		instantiate_move(special_1)
+		animated_sprite.play("Smash")
 
 func instantiate_move(selected_move: PackedScene):
 	var move: Area2D = selected_move.instantiate()
