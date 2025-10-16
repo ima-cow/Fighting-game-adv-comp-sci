@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://djh5dkaqq22v"]
+[gd_scene load_steps=7 format=3 uid="uid://djh5dkaqq22v"]
 
 [ext_resource type="Texture2D" uid="uid://b7c1ex68h85dy" path="res://assets/background.png" id="1_k1bxl"]
 [ext_resource type="PackedScene" uid="uid://drhh06g3j337p" path="res://scenes/ui/hud.tscn" id="1_m4npe"]
@@ -7,10 +7,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_78yxw"]
 size = Vector2(1536, 880)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_k366a"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ugxj"]
-size = Vector2(1024, 96)
+size = Vector2(1024, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_psigm"]
 size = Vector2(256, 32)
@@ -18,7 +16,7 @@ size = Vector2(256, 32)
 [node name="NinjaGardens" type="Node"]
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(-3, -3)
+position = Vector2(12, 0)
 scale = Vector2(0.71055555, 0.69166666)
 texture = ExtResource("1_k1bxl")
 
@@ -33,15 +31,16 @@ shape = SubResource("RectangleShape2D_78yxw")
 [node name="Stage" type="Node" parent="."]
 
 [node name="Floor" type="StaticBody2D" parent="Stage"]
-position = Vector2(0, 256)
+position = Vector2(0, 250)
 metadata/is_platform = false
 
 [node name="Sprite2D" type="Sprite2D" parent="Stage/Floor"]
 position = Vector2(9.53674e-06, -7.62939e-06)
-scale = Vector2(1024, 96)
-texture = SubResource("PlaceholderTexture2D_k366a")
+scale = Vector2(8, 8)
+texture = ExtResource("2_ohto0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Floor"]
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_2ugxj")
 
 [node name="Platform" type="StaticBody2D" parent="Stage"]
