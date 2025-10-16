@@ -7,8 +7,7 @@ var stage_selector := preload("res://scenes/ui/stage_selector.tscn")
 var waiting_screen := preload("res://scenes/ui/waiting_screen.tscn")
 
 var stage_scenes: Array[PackedScene] = [
-	preload("res://scenes/stages/ninja_gardens.tscn"),
-	preload("res://scenes/stages/big_hands_city.tscn")
+	preload("res://scenes/stages/ninja_gardens.tscn")
 ]
 
 var ninja := preload("res://scenes/characters/ninja.tscn")
@@ -17,8 +16,7 @@ var ready_for_stage := false
 const SERVER := 1
 
 enum stages {
-	NINJA_GARDENS,
-	BIG_HANDS_CITY
+	NINJA_GARDENS
 }
 
 var player_names = {}
@@ -78,15 +76,8 @@ func add_name(name_to_add: String):
 func select_stage():
 	add_child(stage_selector.instantiate())
 	$StageSelector.get_node("%NinjaGardensButton").pressed.connect(_on_ninja_gardens_button_pressed)
-	$StageSelector.get_node("%BigHandsCityButton").pressed.connect(_on_big_hands_city_button_pressed)
-
 func _on_ninja_gardens_button_pressed():
 	selected_stage = stages.NINJA_GARDENS
-	$StageSelector.queue_free()
-	sync_stages()
-
-func _on_big_hands_city_button_pressed():
-	selected_stage = stages.BIG_HANDS_CITY
 	$StageSelector.queue_free()
 	sync_stages()
 

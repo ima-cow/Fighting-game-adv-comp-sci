@@ -45,20 +45,3 @@ texture_normal = ExtResource("2_disgg")
 layout_mode = 2
 text = "Ninja Gadens"
 horizontal_alignment = 1
-
-[node name="CenterContainer3" type="CenterContainer" parent="CenterContainer/HBoxContainer"]
-custom_minimum_size = Vector2(200, 200)
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/HBoxContainer/CenterContainer3"]
-layout_mode = 2
-
-[node name="BigHandsCityButton" type="TextureButton" parent="CenterContainer/HBoxContainer/CenterContainer3/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-texture_normal = ExtResource("2_disgg")
-
-[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/CenterContainer3/VBoxContainer"]
-layout_mode = 2
-text = "Big Hands City"
-horizontal_alignment = 1

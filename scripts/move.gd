@@ -20,11 +20,3 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	global_position = character.global_position
-
-func _process(_delta: float) -> void:
-	if $"../..".fliped:
-		rotation_degrees = 180
-		$Sprite2D.flip_v = true
-	else:
-		rotation_degrees = 0
-		$Sprite2D.flip_v = false

@@ -183,7 +183,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8olko")
 }],
-"loop": true,
+"loop": false,
 "name": &"Jab",
 "speed": 8.0
 }, {
@@ -240,7 +240,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_e0pwd")
 }],
-"loop": true,
+"loop": false,
 "name": &"Smash",
 "speed": 8.0
 }]
@@ -267,9 +267,7 @@ script = ExtResource("2_4i837")
 position = Vector2(-38, -48)
 scale = Vector2(2.5625, 2.5625002)
 sprite_frames = SubResource("SpriteFrames_uiabq")
-animation = &"Smash"
-frame = 5
-frame_progress = 0.9324379
+animation = &"Jab"
 centered = false
 
 [connection signal="spawned" from="MoveSpawner" to="MoveResolver" method="_on_move_spawner_spawned"]

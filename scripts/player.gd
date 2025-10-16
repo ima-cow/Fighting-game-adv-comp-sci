@@ -30,19 +30,15 @@ func _physics_process(delta: float) -> void:
 	if player_id == multiplayer.get_unique_id():
 		_do_player_actions(delta)
 	move_and_slide()
-	_do_player_animations(delta)
 
 func _do_player_animations(_delta: float):
-	#Run_Animation
-	if (velocity.x != 0 && velocity.y == 0):
+	if !can_move:
+		return
+	elif (velocity.x != 0 && velocity.y == 0):
 		animated_sprite.play("Run")
-	
-	#Idle_Animation
-	if (velocity.x == 0 && velocity.y == 0):
+	elif (velocity.x == 0 && velocity.y == 0):
 		animated_sprite.play("Idle")
-	
-	#Jump_Animations
-	if (velocity.y != 0):
+	elif (velocity.y != 0):
 		if (velocity.y > 0):
 			animated_sprite.play("Jump")
 		if (velocity.y < 0):
@@ -74,6 +70,7 @@ func _do_player_actions(delta: float):
 		
 		_move_through_platform()
 		$MoveResolver.do_move(global_position)
+		_do_player_animations(delta)
 	else:
 		velocity.x *= 0.8
 

@@ -7,21 +7,23 @@ signal move_instantiated(player_hit_id: int, damage: float, knockback: Vector2)
 @export var smash := preload("res://scenes/moves/smash.tscn")
 
 var player_position: Vector2
-@onready var animated_sprite = $AnimatedSprite2D
+@onready var animated_sprite:AnimatedSprite2D = $"../AnimatedSprite2D"
 
 func do_move(position: Vector2):
 	player_position = position
-	#spagetti code :/
-	#lmk if you know any better way to do this
+	
 	if Input.is_action_just_pressed("jab"):
-		print("jab")
-		instantiate_move(jab)
+		#print("jab")
 		animated_sprite.play("Jab")
+		instantiate_move(jab)
 		
 	elif Input.is_action_just_pressed("smash"):
 		print("smash")
 		instantiate_move(smash)
 		animated_sprite.play("Smash")
+
+func _process(delta: float) -> void:
+	print(animated_sprite.animation)
 
 func instantiate_move(selected_move: PackedScene):
 	var move: Area2D = selected_move.instantiate()
