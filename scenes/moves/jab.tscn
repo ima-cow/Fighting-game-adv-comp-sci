@@ -9,7 +9,7 @@ size = Vector2(48, 32)
 monitoring = false
 monitorable = false
 script = ExtResource("1_6qkxs")
-damage = 5.0
+damage = 100.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(32, 0)

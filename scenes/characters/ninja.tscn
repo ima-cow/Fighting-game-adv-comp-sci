@@ -254,7 +254,7 @@ metadata/JUMP_SPEED = 0
 replication_config = SubResource("SceneReplicationConfig_qi5yo")
 
 [node name="MoveSpawner" parent="." instance=ExtResource("3_8d3cj")]
-_spawnable_scenes = PackedStringArray("res://scenes/moves/blank_move.tscn")
+_spawnable_scenes = PackedStringArray()
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)

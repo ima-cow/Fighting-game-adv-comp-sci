@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://djh5dkaqq22v"]
+[gd_scene load_steps=8 format=3 uid="uid://djh5dkaqq22v"]
 
 [ext_resource type="Texture2D" uid="uid://b7c1ex68h85dy" path="res://assets/background.png" id="1_k1bxl"]
 [ext_resource type="PackedScene" uid="uid://drhh06g3j337p" path="res://scenes/ui/hud.tscn" id="1_m4npe"]
+[ext_resource type="Script" uid="uid://dif4a6c7n74ux" path="res://scenes/stages/ninja_gardens.gd" id="1_sqt6n"]
 [ext_resource type="Texture2D" uid="uid://b60bs0xpcwwpx" path="res://assets/small_platform.png" id="2_ohto0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_78yxw"]
@@ -14,11 +15,12 @@ size = Vector2(1024, 128)
 size = Vector2(256, 32)
 
 [node name="NinjaGardens" type="Node"]
+script = ExtResource("1_sqt6n")
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -1
-position = Vector2(12, 0)
-scale = Vector2(0.71055555, 0.69166666)
+position = Vector2(-1.5258789e-05, 7.9999924)
+scale = Vector2(0.6844444, 0.72)
 texture = ExtResource("1_k1bxl")
 
 [node name="Camera2D" type="Camera2D" parent="."]

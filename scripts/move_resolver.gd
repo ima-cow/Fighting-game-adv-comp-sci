@@ -18,12 +18,9 @@ func do_move(position: Vector2):
 		instantiate_move(jab)
 		
 	elif Input.is_action_just_pressed("smash"):
-		print("smash")
+		#print("smash")
 		instantiate_move(smash)
 		animated_sprite.play("Smash")
-
-func _process(delta: float) -> void:
-	print(animated_sprite.animation)
 
 func instantiate_move(selected_move: PackedScene):
 	var move: Area2D = selected_move.instantiate()

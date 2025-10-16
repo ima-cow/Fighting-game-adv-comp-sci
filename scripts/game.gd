@@ -51,38 +51,46 @@ func _on_name_field_text_submitted(new_text: String):
 		host_game.disabled = true
 		join_game.disabled = true
 
+var player_name := ""
 func _on_host_game_pressed():
 	$ServerConnector.queue_free()
-	add_name.rpc(name_field.text)
+	player_name = name_field.text
 	select_stage()
 	MultiplayerManager.become_host()
 
 func _on_join_game_pressed():
+	print(multiplayer.get_unique_id())
 	if ip_address_field.has_ime_text():
 		MultiplayerManager.join_as_player_2(ip_address_field.text)
 		await multiplayer.connected_to_server
-		add_name.rpc(name_field.text)
+		add_name.rpc("client",name_field.text)
 	else:
 		MultiplayerManager.join_as_player_2(ip_address_field.placeholder_text)
 		await multiplayer.connected_to_server
-		add_name.rpc(name_field.text)
+		add_name.rpc("client",name_field.text)
 	$ServerConnector.queue_free()
 	sync_stages()
 
 @rpc("any_peer", "call_local")
-func add_name(name_to_add: String):
-	player_names[multiplayer.get_remote_sender_id()] = name_to_add
+func add_name(peer: String, name_to_add: String):
+	player_names[peer] = name_to_add
 
 func select_stage():
 	add_child(stage_selector.instantiate())
 	$StageSelector.get_node("%NinjaGardensButton").pressed.connect(_on_ninja_gardens_button_pressed)
+
 func _on_ninja_gardens_button_pressed():
 	selected_stage = stages.NINJA_GARDENS
+	print(multiplayer.get_peers())
+	add_name.rpc("server", player_name)
 	$StageSelector.queue_free()
 	sync_stages()
 
 func sync_stages():
-	add_child(waiting_screen.instantiate())
+	if multiplayer.is_server():
+		add_child(preload("res://scenes/ui/stop_screen.tscn").instantiate())
+	else:
+		add_child(waiting_screen.instantiate())
 	ready_for_stage = true
 	if not multiplayer.get_peers().is_empty():
 		attempt_to_instantiate_stage.rpc_id(multiplayer.get_peers()[0])

@@ -14,6 +14,8 @@ func _ready() -> void:
 	
 	for player in get_children():
 		player.get_node("MoveResolver").move_instantiated.connect(_on_player_move_instantiated)
+	
+	$"../NinjaGardens/PlayArea".body_shape_exited.connect(_on_play_area_exited)
 
 func _on_player_move_instantiated(player_hit_id: int, damage: float, knockback: Vector2):
 	hit_player.rpc(player_hit_id, damage, knockback)
@@ -39,7 +41,14 @@ func damage_player(player:CharacterBody2D, damage: float):
 		player.stocks -= 1
 		player_died.emit(player.player_id)
 		if player.stocks <= 0:
-			player.queue_free()
+			var end_screen = preload("res://scenes/ui/end_screen.tscn").instantiate()
+			$"..".add_child(end_screen)
+			$"../NinjaGardens".queue_free()
+			if player.player_id == 1:
+				end_screen.get_node("CenterContainer/Label").text = $"..".player_names["server"]+" won!"
+			else:
+				end_screen.get_node("CenterContainer/Label").text = $"..".player_names["client"]+" won!"
+			queue_free()
 		else:
 			player.get_node("CollisionShape2D").disabled = true
 			player.visible = false
@@ -59,3 +68,7 @@ func knockback_player(player_hit_char:CharacterBody2D, player_attacker: Characte
 	else:
 		player_hit_char.velocity = Vector2(-knockback.x,knockback.y)
 		print("2 ",player_hit_char.velocity)
+		
+
+func _on_play_area_exited(_body_rid: RID, body: Node2D, _body_shape_index: int, _local_shape_index: int):
+	damage_player(body, 999999)

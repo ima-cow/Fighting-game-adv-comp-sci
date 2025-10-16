@@ -96,9 +96,13 @@ func _move_through_platform():
 func _process(_delta: float) -> void:	
 	if Input.get_action_strength("move_right") > 0:
 		$AnimatedSprite2D.flip_h = false
+		if fliped and $AnimatedSprite2D.animation == "Idle":
+			$AnimatedSprite2D.global_position.x += 50
 		fliped = false
 	elif Input.get_action_strength("move_left") > 0:
 		$AnimatedSprite2D.flip_h = true
+		if !fliped and $AnimatedSprite2D.animation == "Idle":
+			$AnimatedSprite2D.global_position.x -= 50
 		fliped = true
 
 func _on_play_area_body_shaped_exited():

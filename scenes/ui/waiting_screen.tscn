@@ -26,4 +26,4 @@ grow_vertical = 2
 [node name="Label" type="Label" parent="CenterContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
-text = "Waiting for secopnd player"
+text = "Waiting for second player"
