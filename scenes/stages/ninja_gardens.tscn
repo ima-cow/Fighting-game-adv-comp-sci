@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://djh5dkaqq22v"]
+[gd_scene load_steps=8 format=3 uid="uid://djh5dkaqq22v"]
 
+[ext_resource type="Texture2D" uid="uid://b7c1ex68h85dy" path="res://assets/background.png" id="1_k1bxl"]
 [ext_resource type="PackedScene" uid="uid://drhh06g3j337p" path="res://scenes/ui/hud.tscn" id="1_m4npe"]
+[ext_resource type="Texture2D" uid="uid://b60bs0xpcwwpx" path="res://assets/small_platform.png" id="2_ohto0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_78yxw"]
 size = Vector2(1536, 880)
@@ -10,12 +12,15 @@ size = Vector2(1536, 880)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ugxj"]
 size = Vector2(1024, 96)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_78yxw"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_psigm"]
-size = Vector2(288, 26)
+size = Vector2(256, 32)
 
 [node name="NinjaGardens" type="Node"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(-3, -3)
+scale = Vector2(0.71055555, 0.69166666)
+texture = ExtResource("1_k1bxl")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -45,8 +50,8 @@ metadata/is_platform = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Stage/Platform"]
 position = Vector2(7.62939e-06, -4.76837e-07)
-scale = Vector2(288, 32)
-texture = SubResource("PlaceholderTexture2D_78yxw")
+scale = Vector2(2, 2)
+texture = ExtResource("2_ohto0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Platform"]
 shape = SubResource("RectangleShape2D_psigm")
@@ -58,8 +63,8 @@ metadata/is_platform = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Stage/Platform2"]
 position = Vector2(7.62939e-06, -4.76837e-07)
-scale = Vector2(288, 32)
-texture = SubResource("PlaceholderTexture2D_78yxw")
+scale = Vector2(2, 2)
+texture = ExtResource("2_ohto0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Platform2"]
 shape = SubResource("RectangleShape2D_psigm")
@@ -71,8 +76,8 @@ metadata/is_platform = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Stage/Platform3"]
 position = Vector2(7.62939e-06, -4.76837e-07)
-scale = Vector2(288, 32)
-texture = SubResource("PlaceholderTexture2D_78yxw")
+scale = Vector2(2, 2)
+texture = ExtResource("2_ohto0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Platform3"]
 shape = SubResource("RectangleShape2D_psigm")
